@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Adu Cepat Tarik Tambang: Ideologi Pancasila</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- LOBBY SCREEN -->
+    <div class="lobby-screen" id="lobby-screen">
+        <h1 class="start-title">KUIS ADU CEPAT<br><span style="color:#ffd700;">TARIK TAMBANG PANCASILA</span></h1>
+        
+        <div class="lobby-box">
+            <h3>Masuk ke Arena</h3>
+            <input type="text" id="player-name" placeholder="Masukkan Nama Anda" maxlength="15">
+            
+            <div class="lobby-actions">
+                <div class="action-card">
+                    <h4>Buat Room Baru</h4>
+                    <p>Anda akan menjadi <strong>HOST (Proyektor)</strong>. Tidak ikut bermain, hanya menampilkan tali & skor.</p>
+                    <button id="btn-create-room" class="btn-primary">Buat Room (Host)</button>
+                </div>
+                
+                <div class="action-card">
+                    <h4>Gabung Room</h4>
+                    <p>Anda akan menjadi <strong>PEMAIN</strong> (Tim Merah atau Putih).</p>
+                    <input type="text" id="room-code-input" placeholder="Kode Room (mis. AB12CD)" style="text-transform: uppercase;">
+                    <button id="btn-join-room" class="btn-secondary">Gabung (Pemain)</button>
+                </div>
+            </div>
+            
+            <div id="lobby-message" class="lobby-message"></div>
+        </div>
+    </div>
+
+    <!-- WAITING SCREEN -->
+    <div class="start-screen" id="waiting-screen" style="display: none;">
+        <h1 class="start-title">Menunggu Pemain...</h1>
+        <p style="font-size: 24px; color: white;">Kode Room: <strong id="display-room-code" style="color: #ffd700; font-size: 32px;"></strong></p>
+        <p style="font-size: 18px; color: #ccc; margin-top: 10px;">Berikan kode ini ke dua pemain agar mereka bisa bertanding.</p>
+        <div id="players-status" style="margin-top: 30px; font-size: 20px; color: #fff;">
+            <p>Tim Merah (Player 1): <span id="wait-player-a">Menunggu...</span></p>
+            <p>Tim Putih (Player 2): <span id="wait-player-b">Menunggu...</span></p>
+        </div>
+    </div>
+
+    <!-- COUNTDOWN SCREEN -->
+    <div class="start-screen" id="countdown-screen" style="display: none;">
+        <h1 class="start-title" id="vs-text">Player 1 VS Player 2</h1>
+        <div class="countdown-text" id="countdown-text">3</div>
+    </div>
+
+    <!-- GAME ARENA -->
+    <div class="background-split" id="background-split">
+        <div class="bg-left" id="bg-a"></div>
+        <div class="bg-right" id="bg-b"></div>
+    </div>
+
+    <header id="header-area">
+        <div class="team-info team-a">
+            <div class="team-name" id="name-a">TIM A (MERAH)</div>
+            <div class="score">Skor: <span id="score-a">0</span></div>
+        </div>
+        
+        <div class="timer-container">
+            <div class="timer-label">WAKTU SISA</div>
+            <div class="timer-value" id="timer-text">15</div>
+        </div>
+
+        <div class="team-info team-b">
+            <div class="team-name" id="name-b">TIM B (PUTIH)</div>
+            <div class="score">Skor: <span id="score-b">0</span></div>
+        </div>
+    </header>
+
+    <div class="arena">
+        <div class="rope-container" id="rope-area">
+            <div class="rope"></div>
+            <div class="indicator" id="indicator"></div>
+        </div>
+
+        <div class="question-center" id="question-area">
+            <img id="question-img" src="" alt="Gambar Soal">
+            <div id="question-text">Menunggu soal...</div>
+        </div>
+
+        <div class="quiz-area" id="quiz-area" style="display: none;">
+            
+            <div class="quiz-box box-host" id="box-host" style="display: none;">
+                <h3 style="margin-bottom:15px; color:#ffd700; text-align:center;">PILIHAN JAWABAN</h3>
+                <div class="options" id="options-host"></div>
+            </div>
+
+            <div class="quiz-box box-a" id="box-a" style="display: none;">
+                <h3 style="margin-bottom:15px; color:#ff7777; text-align:center;">PILIHAN JAWABAN ANDA</h3>
+                <div class="options" id="options-a"></div>
+            </div>
+            
+            <div class="quiz-box box-b" id="box-b" style="display: none;">
+                <h3 style="margin-bottom:15px; color:#dddddd; text-align:center;">PILIHAN JAWABAN ANDA</h3>
+                <div class="options" id="options-b"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME OVER OVERLAY -->
+    <div class="overlay" id="end-overlay">
+        <h1 id="end-title">Game Over</h1>
+        <button id="restart-btn" onclick="location.reload()">Kembali ke Awal</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
