@@ -4,7 +4,6 @@ const socket = io();
 const lobbyScreen = document.getElementById('lobby-screen');
 const waitingScreen = document.getElementById('waiting-screen');
 const countdownScreen = document.getElementById('countdown-screen');
-const playerNameInput = document.getElementById('player-name');
 const roomCodeInput = document.getElementById('room-code-input');
 const btnCreateRoom = document.getElementById('btn-create-room');
 const btnJoinRoom = document.getElementById('btn-join-room');
@@ -47,8 +46,10 @@ let isLocked = true;
 // -- LOBBY LOGIC --
 
 btnCreateRoom.addEventListener('click', () => {
-    const playerName = playerNameInput.value.trim() || 'Host';
-    socket.emit('createRoom', { playerName }, (response) => {
+    const playerName = 'Host';
+    const questionSetSelect = document.getElementById('question-set-select');
+    const selectedSet = questionSetSelect.value;
+    socket.emit('createRoom', { playerName, selectedSet }, (response) => {
         if (response.success) {
             myRoom = response.roomCode;
             myRole = response.role; // 'host'
@@ -70,13 +71,14 @@ btnCreateRoom.addEventListener('click', () => {
 });
 
 btnJoinRoom.addEventListener('click', () => {
-    const playerName = playerNameInput.value.trim();
     const roomCode = roomCodeInput.value.trim();
-    if (!playerName || !roomCode) {
-        lobbyMessage.innerText = "Masukkan nama dan kode room!";
+    
+    if (!roomCode) {
+        lobbyMessage.innerText = "Masukkan kode room!";
         return;
     }
-    socket.emit('joinRoom', { playerName, roomCode }, (response) => {
+    
+    socket.emit('joinRoom', { roomCode }, (response) => {
         if (response.success) {
             myRoom = response.roomCode;
             myRole = response.role; // 'A' or 'B'
@@ -106,11 +108,11 @@ btnJoinRoom.addEventListener('click', () => {
 
 socket.on('playerJoined', (data) => {
     if (data.players.A) {
-        waitPlayerA.innerText = data.players.A;
+        waitPlayerA.innerText = data.players.A.name;
         waitPlayerA.style.color = '#ff7777';
     }
     if (data.players.B) {
-        waitPlayerB.innerText = data.players.B;
+        waitPlayerB.innerText = data.players.B.name;
         waitPlayerB.style.color = '#ffffff';
     }
 });
@@ -119,9 +121,9 @@ socket.on('gameStart', (data) => {
     waitingScreen.style.display = 'none';
     countdownScreen.style.display = 'flex';
     
-    nameAEl.innerText = `${data.players.A} (MERAH)`;
-    nameBEl.innerText = `${data.players.B} (PUTIH)`;
-    vsText.innerText = `${data.players.A} VS ${data.players.B}`;
+    nameAEl.innerText = `${data.players.A.name} (MERAH)`;
+    nameBEl.innerText = `${data.players.B.name} (PUTIH)`;
+    vsText.innerText = `${data.players.A.name} VS ${data.players.B.name}`;
 
     let count = 3;
     countdownText.innerText = count;

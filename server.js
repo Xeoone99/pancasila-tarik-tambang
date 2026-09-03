@@ -9,91 +9,70 @@ const io = new Server(server);
 
 app.use(express.static(path.join(__dirname)));
 
-const questionsPool = [
-    {
-        q: "Gambar lambang Bintang di atas mewakili Pancasila sila ke-...",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Star_of_Pancasila.svg/200px-Star_of_Pancasila.svg.png",
-        opts: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Keempat"],
-        ans: 0
-    },
-    {
-        q: "Gambar Rantai Emas di atas adalah lambang dari sila ke-...",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Chain_of_Pancasila.svg/200px-Chain_of_Pancasila.svg.png",
-        opts: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Kelima"],
-        ans: 1
-    },
-    {
-        q: "Gambar Pohon Beringin di atas merupakan lambang Pancasila sila ke-...",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Banyan_tree_of_Pancasila.svg/200px-Banyan_tree_of_Pancasila.svg.png",
-        opts: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Keempat"],
-        ans: 2
-    },
-    {
-        q: "Gambar Kepala Banteng ini melambangkan sila Pancasila ke-...",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Head_of_Banteng.svg/200px-Head_of_Banteng.svg.png",
-        opts: ["Sila Kedua", "Sila Ketiga", "Sila Keempat", "Sila Kelima"],
-        ans: 2
-    },
-    {
-        q: "Lambang Padi dan Kapas di atas mewakili Pancasila sila ke-...",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Rice_and_Cotton_of_Pancasila.svg/200px-Rice_and_Cotton_of_Pancasila.svg.png",
-        opts: ["Sila Kedua", "Sila Ketiga", "Sila Keempat", "Sila Kelima"],
-        ans: 3
-    },
-    {
-        q: "Makna hakiki dari semboyan 'Bhinneka Tunggal Ika' adalah...",
-        opts: ["Berbeda-beda tetapi tetap satu jua", "Bersatu kita teguh, bercerai kita runtuh", "Keadilan sosial bagi seluruh rakyat", "Negara yang berdasarkan Ketuhanan"],
-        ans: 0
-    },
-    {
-        q: "Sila yang menjadi dasar persatuan bangsa Indonesia di tengah keberagaman etnis, suku, dan budaya adalah...",
-        opts: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Kelima"],
-        ans: 2
-    },
-    {
-        q: "Berikut ini adalah wujud nyata pengamalan Sila Keempat (Kerakyatan) dalam kehidupan berbangsa...",
-        opts: ["Menghormati perayaan agama orang lain", "Menyelesaikan masalah melalui musyawarah mufakat", "Gemar menabung dan hidup tidak boros", "Menjaga keamanan dan ketertiban lalu lintas"],
-        ans: 1
-    },
-    {
-        q: "Pancasila sebagai 'Ideologi Terbuka' memiliki arti bahwa...",
-        opts: ["Dapat diubah kapan saja sesuai kemauan pemimpin", "Menyerap seluruh budaya asing secara bebas mutlak", "Mampu menyesuaikan dinamika zaman tanpa mengubah nilai dasar", "Hanya terbuka untuk golongan dan elit tertentu"],
-        ans: 2
-    },
-    {
-        q: "Salah satu pilar utama wawasan kebangsaan Indonesia adalah UUD 1945, yang kedudukannya sebagai...",
-        opts: ["Buku sejarah pahlawan bangsa", "Hukum dasar tertulis yang menempati posisi tertinggi", "Kumpulan peraturan daerah", "Dokumen pakta internasional"],
-        ans: 1
-    },
-    {
-        q: "Membangun sikap toleransi antar umat beragama adalah perwujudan langsung dari...",
-        opts: ["Sila Ketuhanan Yang Maha Esa", "Sila Persatuan Indonesia", "Sila Keadilan Sosial", "Sila Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan"],
-        ans: 0
-    },
-    {
-        q: "Sikap rela berkorban untuk kepentingan negara dan bangsa di atas kepentingan pribadi disebut...",
-        opts: ["Chauvinisme", "Hedonisme", "Patriotisme", "Etnosentrisme"],
-        ans: 2
-    },
-    {
-        q: "Lembaga penyelenggara pemilihan umum di Indonesia yang bersifat nasional, tetap, dan mandiri adalah...",
-        opts: ["Mahkamah Konstitusi", "Komisi Pemilihan Umum (KPU)", "Dewan Perwakilan Rakyat (DPR)", "Komisi Pemberantasan Korupsi (KPK)"],
-        ans: 1
-    },
-    {
-        q: "Berdasarkan amanat UUD 1945, kedaulatan tertinggi Negara Republik Indonesia berada di tangan...",
-        opts: ["Presiden RI", "Majelis Permusyawaratan Rakyat", "Rakyat", "Mahkamah Agung"],
-        ans: 2
-    }
-];
+const questionsPool = {
+    setA: [
+        { q: "Sila pertama Pancasila dilambangkan dengan...", opts: ["Bintang", "Rantai", "Pohon Beringin", "Kepala Banteng"], ans: 0 },
+        { q: "Sila kedua berbunyi...", opts: ["Ketuhanan Yang Maha Esa", "Kemanusiaan yang adil dan beradab", "Persatuan Indonesia", "Keadilan sosial"], ans: 1 },
+        { q: "Lambang Pohon Beringin memiliki makna...", opts: ["Kekuatan otot", "Tempat berteduh dan persatuan", "Kekayaan alam", "Kejayaan masa lalu"], ans: 1 },
+        { q: "Sila keempat dipimpin oleh...", opts: ["Hikmat kebijaksanaan", "Presiden dan Wakil", "Rakyat", "MPR dan DPR"], ans: 0 },
+        { q: "Keadilan sosial bagi seluruh rakyat Indonesia dilambangkan dengan...", opts: ["Padi dan Kapas", "Pohon Beringin", "Bintang Emas", "Rantai Baja"], ans: 0 },
+        { q: "Pancasila lahir pada tanggal...", opts: ["1 Juni 1945", "17 Agustus 1945", "18 Agustus 1945", "10 November 1945"], ans: 0 },
+        { q: "Siapakah penggali Pancasila?", opts: ["Moh. Hatta", "Soekarno", "Ki Hajar Dewantara", "Ahmad Yani"], ans: 1 },
+        { q: "Semboyan Bhinneka Tunggal Ika terdapat pada kitab...", opts: ["Sutasoma", "Negarakertagama", "Arjuna Wiwaha", "Ramayana"], ans: 0 },
+        { q: "Bhinneka Tunggal Ika berarti...", opts: ["Berbeda-beda tapi satu", "Bersatu kita teguh", "Merdeka atau mati", "Satu nusa satu bangsa"], ans: 0 },
+        { q: "Pancasila sebagai dasar negara disahkan pada...", opts: ["18 Agustus 1945", "1 Juni 1945", "22 Juni 1945", "17 Agustus 1945"], ans: 0 }
+    ],
+    setB: [
+        { q: "Dasar negara Indonesia adalah...", opts: ["UUD 1945", "Pancasila", "Bhinneka Tunggal Ika", "Tap MPR"], ans: 1 },
+        { q: "Sila ketiga berbunyi...", opts: ["Persatuan Indonesia", "Keadilan Sosial", "Kemanusiaan yang adil", "Ketuhanan yang Maha Esa"], ans: 0 },
+        { q: "Lambang sila ke-4 adalah...", opts: ["Bintang", "Kepala Banteng", "Rantai", "Padi dan Kapas"], ans: 1 },
+        { q: "Warna latar pada lambang Bintang (Sila ke-1) adalah...", opts: ["Hitam", "Merah", "Putih", "Kuning"], ans: 0 },
+        { q: "Rantai pada sila kedua melambangkan...", opts: ["Pengekangan", "Hubungan manusia yang saling membantu", "Kekuatan militer", "Ikatan ekonomi"], ans: 1 },
+        { q: "Piagam Jakarta dirumuskan pada tanggal...", opts: ["22 Juni 1945", "1 Juni 1945", "18 Agustus 1945", "17 Agustus 1945"], ans: 0 },
+        { q: "Padi pada lambang sila kelima bermakna...", opts: ["Kecukupan pangan", "Kecukupan sandang", "Kekayaan hutan", "Kemakmuran laut"], ans: 0 },
+        { q: "Jumlah bulu pada masing-masing sayap Garuda Pancasila adalah...", opts: ["17", "8", "19", "45"], ans: 0 },
+        { q: "Jumlah bulu pada ekor Garuda Pancasila adalah...", opts: ["8", "17", "19", "45"], ans: 0 },
+        { q: "Garuda Pancasila dirancang oleh...", opts: ["Soekarno", "Sultan Hamid II", "Moh Yamin", "Soepomo"], ans: 1 }
+    ],
+    setC: [
+        { q: "Panitia yang merumuskan Piagam Jakarta disebut...", opts: ["Panitia Sembilan", "PPKI", "BPUPKI", "Panitia Delapan"], ans: 0 },
+        { q: "Kata 'Pancasila' diambil dari bahasa...", opts: ["Sanskerta", "Jawa Kuno", "Melayu", "Sunda"], ans: 0 },
+        { q: "Burung Garuda menengok ke arah...", opts: ["Kiri", "Kanan", "Depan", "Atas"], ans: 1 },
+        { q: "Kapas pada lambang sila kelima bermakna...", opts: ["Kecukupan pangan", "Kecukupan sandang", "Kekayaan alam", "Kelembutan hati"], ans: 1 },
+        { q: "Sila yang menekankan musyawarah mufakat adalah...", opts: ["Sila 2", "Sila 3", "Sila 4", "Sila 5"], ans: 2 },
+        { q: "Menjaga kerukunan antar umat beragama adalah pengamalan sila ke...", opts: ["1", "2", "3", "5"], ans: 0 },
+        { q: "Gotong royong merupakan cerminan dari sila...", opts: ["1", "2", "3", "4"], ans: 2 },
+        { q: "Membela tanah air adalah kewajiban yang sesuai dengan sila ke...", opts: ["1", "2", "3", "5"], ans: 2 },
+        { q: "Sikap adil terhadap sesama adalah pengamalan sila ke...", opts: ["2", "3", "4", "5"], ans: 3 },
+        { q: "Pancasila berkedudukan sebagai...", opts: ["Sumber dari segala sumber hukum", "Hukum adat", "Aturan internasional", "Kebijakan presiden"], ans: 0 }
+    ],
+    setD: [
+        { q: "Tidak memaksakan agama kepada orang lain adalah nilai sila ke...", opts: ["1", "2", "3", "4"], ans: 0 },
+        { q: "Suka menabung dan tidak boros adalah pengamalan sila ke...", opts: ["2", "3", "4", "5"], ans: 3 },
+        { q: "Berani membela kebenaran dan keadilan mencerminkan sila ke...", opts: ["1", "2", "3", "4"], ans: 1 },
+        { q: "Cinta tanah air dan bangsa mencerminkan sila ke...", opts: ["1", "2", "3", "4"], ans: 2 },
+        { q: "Menghargai hasil karya orang lain adalah nilai dari sila...", opts: ["2", "3", "4", "5"], ans: 3 },
+        { q: "Menerima dan melaksanakan hasil musyawarah adalah wujud sila ke...", opts: ["2", "3", "4", "5"], ans: 2 },
+        { q: "Rantai pada sila kedua terdiri atas mata rantai berbentuk...", opts: ["Bulat dan Kotak", "Segitiga dan Bulat", "Persegi dan Lingkaran", "Segilima dan Lingkaran"], ans: 2 },
+        { q: "Bintang emas bersudut...", opts: ["4", "5", "6", "8"], ans: 1 },
+        { q: "Teks Pancasila dibacakan saat upacara bendera oleh...", opts: ["Pembina upacara", "Pemimpin upacara", "Peserta upacara", "Ajudan"], ans: 0 },
+        { q: "Pancasila berfungsi sebagai pandangan hidup bangsa, artinya...", opts: ["Pedoman aktivitas sehari-hari", "Alat pengekang kebebasan", "Simbol negara semata", "Hafalan anak sekolah"], ans: 0 }
+    ]
+};
 
 const rooms = {};
 const MAX_QUESTIONS = 10;
 
-function generateQuestions() {
-    const imgQuestions = questionsPool.filter(q => q.img).sort(() => Math.random() - 0.5).slice(0, 5);
-    const textQuestions = questionsPool.filter(q => !q.img).sort(() => Math.random() - 0.5).slice(0, 5);
-    return [...imgQuestions, ...textQuestions].sort(() => Math.random() - 0.5);
+function generateQuestions(selectedSet) {
+    if (selectedSet === 'random') {
+        const sets = ['setA', 'setB', 'setC', 'setD'];
+        const randomSet = sets[Math.floor(Math.random() * sets.length)];
+        return [...questionsPool[randomSet]].sort(() => Math.random() - 0.5);
+    }
+    if (questionsPool[selectedSet]) {
+        return [...questionsPool[selectedSet]].sort(() => Math.random() - 0.5);
+    }
+    return [...questionsPool.setA].sort(() => Math.random() - 0.5);
 }
 
 io.on('connection', (socket) => {
@@ -117,7 +96,7 @@ io.on('connection', (socket) => {
                 totalTimeA: 0,
                 totalTimeB: 0,
                 currentQIndex: 0,
-                questions: generateQuestions(),
+                questions: generateQuestions(data.selectedSet || 'random'),
                 status: 'waiting', // waiting, playing, ended
                 questionStartTime: null
             },
@@ -142,10 +121,10 @@ io.on('connection', (socket) => {
         // Cek slot pemain yang kosong (A = player1, B = player2)
         if (room.players.A === null) {
             assignedRole = 'A';
-            room.players.A = { id: socket.id, name: data.playerName, team: 'A' };
+            room.players.A = { id: socket.id, name: 'Tim Merah', team: 'A' };
         } else if (room.players.B === null) {
             assignedRole = 'B';
-            room.players.B = { id: socket.id, name: data.playerName, team: 'B' };
+            room.players.B = { id: socket.id, name: 'Tim Putih', team: 'B' };
         } else {
             return callback({ success: false, message: 'Room sudah penuh (2 Pemain sudah masuk)!' });
         }
@@ -156,8 +135,8 @@ io.on('connection', (socket) => {
         // Update Host and everyone else that someone joined
         io.to(roomCode).emit('playerJoined', {
             players: {
-                A: room.players.A ? room.players.A.name : null,
-                B: room.players.B ? room.players.B.name : null
+                A: room.players.A ? { name: room.players.A.name } : null,
+                B: room.players.B ? { name: room.players.B.name } : null
             }
         });
 
@@ -167,8 +146,8 @@ io.on('connection', (socket) => {
             
             io.to(roomCode).emit('gameStart', {
                 players: {
-                    A: room.players.A.name,
-                    B: room.players.B.name
+                    A: { name: room.players.A.name },
+                    B: { name: room.players.B.name }
                 }
             });
             
@@ -254,7 +233,7 @@ function sendQuestion(roomCode) {
 
     room.state.questionStartTime = Date.now();
 
-    let timeLeft = 15;
+    let timeLeft = 10;
     io.to(roomCode).emit('timerUpdate', timeLeft);
     
     room.timers.questionTimer = setInterval(() => {
@@ -274,6 +253,10 @@ function handleTimeUp(roomCode) {
     
     const currentQ = room.state.questions[room.state.currentQIndex];
     
+    // Memberikan penalti pada skor progres tarik tambang karena kedua pemain tidak menjawab
+    room.state.scoreA = Math.max(0, room.state.scoreA - 5);
+    room.state.scoreB = Math.max(0, room.state.scoreB - 5);
+
     io.to(roomCode).emit('timeUp', {
         correctAnswerIndex: currentQ.ans,
         newState: {

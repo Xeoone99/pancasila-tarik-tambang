@@ -12,20 +12,26 @@
         <h1 class="start-title">KUIS ADU CEPAT<br><span style="color:#ffd700;">TARIK TAMBANG PANCASILA</span></h1>
         
         <div class="lobby-box">
-            <h3>Masuk ke Arena</h3>
-            <input type="text" id="player-name" placeholder="Masukkan Nama Anda" maxlength="15">
+            <h3 style="margin-bottom: 30px;">Masuk ke Arena</h3>
             
             <div class="lobby-actions">
                 <div class="action-card">
                     <h4>Buat Room Baru</h4>
                     <p>Anda akan menjadi <strong>HOST (Proyektor)</strong>. Tidak ikut bermain, hanya menampilkan tali & skor.</p>
+                    <select id="question-set-select" class="lobby-select">
+                        <option value="random">Acak (Semua Tipe)</option>
+                        <option value="setA">Tipe Soal 1</option>
+                        <option value="setB">Tipe Soal 2</option>
+                        <option value="setC">Tipe Soal 3</option>
+                        <option value="setD">Tipe Soal 4</option>
+                    </select>
                     <button id="btn-create-room" class="btn-primary">Buat Room (Host)</button>
                 </div>
                 
                 <div class="action-card">
                     <h4>Gabung Room</h4>
                     <p>Anda akan menjadi <strong>PEMAIN</strong> (Tim Merah atau Putih).</p>
-                    <input type="text" id="room-code-input" placeholder="Kode Room (mis. AB12CD)" style="text-transform: uppercase;">
+                    <input type="text" id="room-code-input" placeholder="Kode Room (mis. AB12CD)" style="margin-bottom: 20px; width: 100%; max-width: 400px; padding: 15px; font-size: 20px; border-radius: 10px; border: none; text-align: center; text-transform: uppercase;">
                     <button id="btn-join-room" class="btn-secondary">Gabung (Pemain)</button>
                 </div>
             </div>
