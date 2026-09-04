@@ -98,5 +98,50 @@ header { display: flex; justify-content: space-between; align-items: flex-start;
 .overlay button:hover { background: #ff4d4d; transform: scale(1.05); }
 
 .win-a { color: #ff4d4d; }
-.win-b { color: #ffffff; }
 .win-draw { color: #ffd700; }
+
+/* Kelas utama untuk efek melayang */
+.efek-melayang {
+  animation: floatAnim 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes floatAnim {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.efek-melayang:hover {
+  animation-play-state: paused;
+}
+
+/* SETTINGS & HISTORY MODAL */
+.btn-settings { position: fixed; top: 20px; right: 20px; font-size: 30px; background: rgba(0,0,0,0.5); border: 2px solid #555; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; transition: 0.3s; z-index: 300; display: flex; align-items: center; justify-content: center; }
+.btn-settings:hover { background: rgba(255,215,0,0.2); border-color: #ffd700; transform: rotate(90deg); }
+
+.history-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 400; }
+.history-modal-content { background: rgba(20, 20, 25, 0.9); border: 1px solid #444; border-radius: 15px; padding: 30px; width: 90%; max-width: 700px; max-height: 80vh; display: flex; flex-direction: column; box-shadow: 0 15px 50px rgba(0,0,0,0.8); }
+.history-modal-content h2 { text-align: center; color: #ffd700; margin-bottom: 20px; font-size: 32px; border-bottom: 2px solid #444; padding-bottom: 10px; }
+.close-modal { position: absolute; top: 20px; right: 25px; font-size: 35px; color: #aaa; cursor: pointer; transition: 0.2s; line-height: 1; }
+.close-modal:hover { color: #ff4d4d; }
+.history-list { overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 15px; padding-right: 10px; }
+.history-list::-webkit-scrollbar { width: 8px; }
+.history-list::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+.history-item { background: rgba(0,0,0,0.6); padding: 15px; border-radius: 10px; border-left: 5px solid #555; display: flex; justify-content: space-between; align-items: center; }
+.history-item.win-a { border-left-color: #ff4d4d; }
+.history-item.win-b { border-left-color: #ffffff; }
+.history-info p { margin-bottom: 5px; font-size: 16px; color: #ccc; }
+.history-info strong { color: #fff; font-size: 18px; }
+
+/* POST-GAME STATS */
+.post-game-stats { display: flex; gap: 30px; margin-top: 30px; width: 100%; max-width: 800px; justify-content: center; flex-wrap: wrap; }
+.stat-box { flex: 1; min-width: 300px; background: rgba(0,0,0,0.7); padding: 25px; border-radius: 15px; border: 2px solid #555; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.stat-a { border-color: #990000; border-top: 5px solid #ff4d4d; }
+.stat-b { border-color: #888888; border-top: 5px solid #ffffff; }
+.stat-box h3 { font-size: 26px; margin-bottom: 15px; text-align: center; }
+.stat-a h3 { color: #ff4d4d; }
+.stat-b h3 { color: #ffffff; }
+.stat-box p { font-size: 18px; color: #ccc; margin-bottom: 10px; display: flex; justify-content: space-between; border-bottom: 1px dashed #444; padding-bottom: 5px; }
+.stat-box strong { color: #fff; font-size: 22px; font-weight: bold; }
+.stat-box strong.highlight { color: #ffd700; }

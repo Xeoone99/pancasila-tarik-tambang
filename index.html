@@ -9,9 +9,14 @@
 <body>
     <!-- LOBBY SCREEN -->
     <div class="lobby-screen" id="lobby-screen">
-        <h1 class="start-title">KUIS ADU CEPAT<br><span style="color:#ffd700;">TARIK TAMBANG PANCASILA</span></h1>
+        <!-- Tombol Pengaturan (Riwayat) -->
+        <button id="btn-settings" class="btn-settings" title="Riwayat Pertandingan">
+            ⚙️
+        </button>
+
+        <h1 class="start-title efek-melayang">KUIS ADU CEPAT<br><span style="color:#ffd700;">TARIK TAMBANG PANCASILA</span></h1>
         
-        <div class="lobby-box">
+        <div class="lobby-box efek-melayang">
             <h3 style="margin-bottom: 30px;">Masuk ke Arena</h3>
             
             <div class="lobby-actions">
@@ -32,6 +37,13 @@
                     <h4>Gabung Room</h4>
                     <p>Anda akan menjadi <strong>PEMAIN</strong> (Tim Merah atau Putih).</p>
                     <input type="text" id="room-code-input" placeholder="Kode Room (mis. AB12CD)" style="margin-bottom: 20px; width: 100%; max-width: 400px; padding: 15px; font-size: 20px; border-radius: 10px; border: none; text-align: center; text-transform: uppercase;">
+                    <select id="school-select" class="lobby-select" style="margin-bottom: 20px;">
+                        <option value="" disabled selected>Pilih Sekolah Anda</option>
+                        <option value="MTSN Negeri">MTSN Negeri</option>
+                        <option value="SMPN 22">SMPN 22</option>
+                        <option value="AL HARIYAH">AL HARIYAH</option>
+                        <option value="SMPN 45">SMPN 45</option>
+                    </select>
                     <button id="btn-join-room" class="btn-secondary">Gabung (Pemain)</button>
                 </div>
             </div>
@@ -46,8 +58,8 @@
         <p style="font-size: 24px; color: white;">Kode Room: <strong id="display-room-code" style="color: #ffd700; font-size: 32px;"></strong></p>
         <p style="font-size: 18px; color: #ccc; margin-top: 10px;">Berikan kode ini ke dua pemain agar mereka bisa bertanding.</p>
         <div id="players-status" style="margin-top: 30px; font-size: 20px; color: #fff;">
-            <p>Tim Merah (Player 1): <span id="wait-player-a">Menunggu...</span></p>
-            <p>Tim Putih (Player 2): <span id="wait-player-b">Menunggu...</span></p>
+            <p>Player 1 (Merah): <span id="wait-player-a">Menunggu...</span></p>
+            <p>Player 2 (Putih): <span id="wait-player-b">Menunggu...</span></p>
         </div>
     </div>
 
@@ -113,7 +125,36 @@
     <!-- GAME OVER OVERLAY -->
     <div class="overlay" id="end-overlay">
         <h1 id="end-title">Game Over</h1>
-        <button id="restart-btn" onclick="location.reload()">Kembali ke Awal</button>
+        
+        <!-- Post-Game Stats Container -->
+        <div class="post-game-stats" id="post-game-stats" style="display: none;">
+            <div class="stat-box stat-a">
+                <h3 id="stat-name-a">Tim Merah</h3>
+                <p>Jawaban Benar: <strong id="stat-correct-a">0</strong> / 10</p>
+                <p>Total Waktu Jawab: <strong id="stat-time-a">0s</strong></p>
+                <p>Rata-rata: <strong id="stat-avg-a">0s</strong> / soal</p>
+            </div>
+            <div class="stat-box stat-b">
+                <h3 id="stat-name-b">Tim Putih</h3>
+                <p>Jawaban Benar: <strong id="stat-correct-b">0</strong> / 10</p>
+                <p>Total Waktu Jawab: <strong id="stat-time-b">0s</strong></p>
+                <p>Rata-rata: <strong id="stat-avg-b">0s</strong> / soal</p>
+            </div>
+        </div>
+
+        <button id="restart-btn" onclick="location.reload()" style="margin-top: 30px;">Kembali ke Awal</button>
+    </div>
+
+    <!-- MATCH HISTORY MODAL -->
+    <div class="history-modal-overlay" id="history-modal" style="display: none;">
+        <div class="history-modal-content">
+            <span class="close-modal" id="close-history">&times;</span>
+            <h2>Riwayat Pertandingan</h2>
+            <div class="history-list" id="history-list">
+                <!-- Daftar riwayat akan dirender di sini -->
+                <p style="text-align:center; color:#aaa; margin-top:20px;">Memuat riwayat...</p>
+            </div>
+        </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

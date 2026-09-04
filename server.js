@@ -62,6 +62,7 @@ const questionsPool = {
 
 const rooms = {};
 const MAX_QUESTIONS = 10;
+const matchHistory = [];
 
 function generateQuestions(selectedSet) {
     if (selectedSet === 'random') {
@@ -95,6 +96,8 @@ io.on('connection', (socket) => {
                 scoreB: 0,
                 totalTimeA: 0,
                 totalTimeB: 0,
+                correctAnswersA: 0,
+                correctAnswersB: 0,
                 currentQIndex: 0,
                 questions: generateQuestions(data.selectedSet || 'random'),
                 status: 'waiting', // waiting, playing, ended
@@ -116,15 +119,27 @@ io.on('connection', (socket) => {
             return callback({ success: false, message: 'Room tidak ditemukan!' });
         }
         
+        // 1. Mencegah HOST ikut gabung menjadi pemain
+        if (room.players.host.id === socket.id) {
+            return callback({ success: false, message: 'Host (Proyektor) tidak boleh ikut bermain sebagai Tim Merah/Putih!' });
+        }
+
+        // 2. Mencegah pemain yang sama mengklik "Gabung" berkali-kali (double-join)
+        // Ini yang menyebabkan 1 orang menempati 2 slot sekaligus dan game langsung mulai
+        if ((room.players.A && room.players.A.id === socket.id) || 
+            (room.players.B && room.players.B.id === socket.id)) {
+            return callback({ success: false, message: 'Anda sudah masuk ke dalam room ini!' });
+        }
+        
         let assignedRole = null;
         
         // Cek slot pemain yang kosong (A = player1, B = player2)
         if (room.players.A === null) {
             assignedRole = 'A';
-            room.players.A = { id: socket.id, name: 'Tim Merah', team: 'A' };
+            room.players.A = { id: socket.id, name: data.school || 'Tim Merah', team: 'A' };
         } else if (room.players.B === null) {
             assignedRole = 'B';
-            room.players.B = { id: socket.id, name: 'Tim Putih', team: 'B' };
+            room.players.B = { id: socket.id, name: data.school || 'Tim Putih', team: 'B' };
         } else {
             return callback({ success: false, message: 'Room sudah penuh (2 Pemain sudah masuk)!' });
         }
@@ -175,10 +190,12 @@ io.on('connection', (socket) => {
                 room.state.scoreA += 10;
                 room.state.ropePos -= 10;
                 room.state.totalTimeA += timeTaken;
+                room.state.correctAnswersA++;
             } else {
                 room.state.scoreB += 10;
                 room.state.ropePos += 10;
                 room.state.totalTimeB += timeTaken;
+                room.state.correctAnswersB++;
             }
         } else {
             if (team === 'A') {
@@ -210,6 +227,10 @@ io.on('connection', (socket) => {
                 sendQuestion(roomCode);
             }
         }, 2000);
+    });
+
+    socket.on('requestHistory', (callback) => {
+        callback({ success: true, history: matchHistory });
     });
 
     socket.on('disconnect', () => {
@@ -282,12 +303,40 @@ function endGame(roomCode) {
     if (!room) return;
     
     room.state.status = 'ended';
+    
+    const nameA = room.players.A ? room.players.A.name : "Tim Merah";
+    const nameB = room.players.B ? room.players.B.name : "Tim Putih";
+    
+    let winner = "Seri";
+    if (room.state.ropePos < 50) winner = nameA;
+    else if (room.state.ropePos > 50) winner = nameB;
+    else if (room.state.totalTimeA < room.state.totalTimeB) winner = nameA;
+    else if (room.state.totalTimeB < room.state.totalTimeA) winner = nameB;
+
+    const matchResult = {
+        date: new Date().toLocaleString(),
+        nameA: nameA,
+        nameB: nameB,
+        scoreA: room.state.scoreA,
+        scoreB: room.state.scoreB,
+        correctAnswersA: room.state.correctAnswersA,
+        correctAnswersB: room.state.correctAnswersB,
+        winner: winner
+    };
+    
+    matchHistory.unshift(matchResult);
+    if (matchHistory.length > 20) matchHistory.pop(); // Keep only last 20
+    
     io.to(roomCode).emit('gameOver', {
         ropePos: room.state.ropePos,
         scoreA: room.state.scoreA,
         scoreB: room.state.scoreB,
         totalTimeA: room.state.totalTimeA,
-        totalTimeB: room.state.totalTimeB
+        totalTimeB: room.state.totalTimeB,
+        correctAnswersA: room.state.correctAnswersA,
+        correctAnswersB: room.state.correctAnswersB,
+        nameA: nameA,
+        nameB: nameB
     });
 }
 
