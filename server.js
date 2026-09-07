@@ -9,6 +9,10 @@ const io = new Server(server);
 
 app.use(express.static(path.join(__dirname)));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 const questionsPool = {
     setA: [
         { q: "Sila pertama Pancasila dilambangkan dengan...", opts: ["Bintang", "Rantai", "Pohon Beringin", "Kepala Banteng"], ans: 0 },
