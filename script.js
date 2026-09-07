@@ -358,10 +358,10 @@ socket.on('gameOver', (data) => {
     const nameA = data.nameA || "Tim Merah";
     const nameB = data.nameB || "Tim Putih";
     
-    if (data.ropePos < 50) {
+    if (data.correctAnswersA > data.correctAnswersB) {
         endTitle.innerHTML = `Selamat ${nameA} (MERAH) Menang!<br><span style='font-size:36px; font-weight:normal; color:#fff;'>Tarik Tambang Dimenangkan!</span>`;
         endTitle.className = 'win-a';
-    } else if (data.ropePos > 50) {
+    } else if (data.correctAnswersB > data.correctAnswersA) {
         endTitle.innerHTML = `Selamat ${nameB} (PUTIH) Menang!<br><span style='font-size:36px; font-weight:normal; color:#ddd;'>Tarik Tambang Dimenangkan!</span>`;
         endTitle.className = 'win-b';
     } else {

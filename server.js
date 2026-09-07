@@ -197,12 +197,6 @@ io.on('connection', (socket) => {
                 room.state.totalTimeB += timeTaken;
                 room.state.correctAnswersB++;
             }
-        } else {
-            if (team === 'A') {
-                room.state.ropePos += 10;
-            } else {
-                room.state.ropePos -= 10;
-            }
         }
 
         // Broadcast result to everyone (termasuk host)
@@ -273,10 +267,6 @@ function handleTimeUp(roomCode) {
     if (!room) return;
     
     const currentQ = room.state.questions[room.state.currentQIndex];
-    
-    // Memberikan penalti pada skor progres tarik tambang karena kedua pemain tidak menjawab
-    room.state.scoreA = Math.max(0, room.state.scoreA - 5);
-    room.state.scoreB = Math.max(0, room.state.scoreB - 5);
 
     io.to(roomCode).emit('timeUp', {
         correctAnswerIndex: currentQ.ans,
@@ -308,8 +298,8 @@ function endGame(roomCode) {
     const nameB = room.players.B ? room.players.B.name : "Tim Putih";
     
     let winner = "Seri";
-    if (room.state.ropePos < 50) winner = nameA;
-    else if (room.state.ropePos > 50) winner = nameB;
+    if (room.state.correctAnswersA > room.state.correctAnswersB) winner = nameA;
+    else if (room.state.correctAnswersB > room.state.correctAnswersA) winner = nameB;
     else if (room.state.totalTimeA < room.state.totalTimeB) winner = nameA;
     else if (room.state.totalTimeB < room.state.totalTimeA) winner = nameB;
 
