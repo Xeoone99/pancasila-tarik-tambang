@@ -1,6 +1,104 @@
-const socket = io();
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, update, remove, get, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// Lobby Elements
+// ==========================================
+// 1. MASUKKAN KONFIGURASI FIREBASE ANDA DI SINI
+// ==========================================
+const firebaseConfig = {
+  apiKey: "AIzaSyDkFaaq4Ey8WOK-gSUaGDztf4Cx7aZFVeM",
+  authDomain: "game-tarik-tambang-11e67.firebaseapp.com",
+  projectId: "game-tarik-tambang-11e67",
+  storageBucket: "game-tarik-tambang-11e67.firebasestorage.app",
+  messagingSenderId: "31237655152",
+  appId: "1:31237655152:web:3b31f3b5a3d8b16effc2b5",
+  // Karena Anda akan membuat Database di Singapore (Asia), URL-nya biasanya seperti ini:
+  databaseURL: "https://game-tarik-tambang-11e67-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+
+// ==========================================
+// 2. INISIALISASI FIREBASE
+// ==========================================
+// Cek jika belum diisi agar tidak error
+let app, db;
+if (firebaseConfig.apiKey) {
+    app = initializeApp(firebaseConfig);
+    db = getDatabase(app);
+} else {
+    alert("PERHATIAN: Konfigurasi Firebase belum diisi di script.js! Game tidak akan berfungsi.");
+}
+
+// ==========================================
+// 3. BANK SOAL (Pindah dari server.js)
+// ==========================================
+const questionsPool = {
+    setA: [
+        { q: "Sila pertama Pancasila dilambangkan dengan...", opts: ["Bintang", "Rantai", "Pohon Beringin", "Kepala Banteng"], ans: 0 },
+        { q: "Sila kedua berbunyi...", opts: ["Ketuhanan Yang Maha Esa", "Kemanusiaan yang adil dan beradab", "Persatuan Indonesia", "Keadilan sosial"], ans: 1 },
+        { q: "Lambang Pohon Beringin memiliki makna...", opts: ["Kekuatan otot", "Tempat berteduh dan persatuan", "Kekayaan alam", "Kejayaan masa lalu"], ans: 1 },
+        { q: "Sila keempat dipimpin oleh...", opts: ["Hikmat kebijaksanaan", "Presiden dan Wakil", "Rakyat", "MPR dan DPR"], ans: 0 },
+        { q: "Keadilan sosial bagi seluruh rakyat Indonesia dilambangkan dengan...", opts: ["Padi dan Kapas", "Pohon Beringin", "Bintang Emas", "Rantai Baja"], ans: 0 },
+        { q: "Pancasila lahir pada tanggal...", opts: ["1 Juni 1945", "17 Agustus 1945", "18 Agustus 1945", "10 November 1945"], ans: 0 },
+        { q: "Siapakah penggali Pancasila?", opts: ["Moh. Hatta", "Soekarno", "Ki Hajar Dewantara", "Ahmad Yani"], ans: 1 },
+        { q: "Semboyan Bhinneka Tunggal Ika terdapat pada kitab...", opts: ["Sutasoma", "Negarakertagama", "Arjuna Wiwaha", "Ramayana"], ans: 0 },
+        { q: "Bhinneka Tunggal Ika berarti...", opts: ["Berbeda-beda tapi satu", "Bersatu kita teguh", "Merdeka atau mati", "Satu nusa satu bangsa"], ans: 0 },
+        { q: "Pancasila sebagai dasar negara disahkan pada...", opts: ["18 Agustus 1945", "1 Juni 1945", "22 Juni 1945", "17 Agustus 1945"], ans: 0 }
+    ],
+    setB: [
+        { q: "Dasar negara Indonesia adalah...", opts: ["UUD 1945", "Pancasila", "Bhinneka Tunggal Ika", "Tap MPR"], ans: 1 },
+        { q: "Sila ketiga berbunyi...", opts: ["Persatuan Indonesia", "Keadilan Sosial", "Kemanusiaan yang adil", "Ketuhanan yang Maha Esa"], ans: 0 },
+        { q: "Lambang sila ke-4 adalah...", opts: ["Bintang", "Kepala Banteng", "Rantai", "Padi dan Kapas"], ans: 1 },
+        { q: "Warna latar pada lambang Bintang (Sila ke-1) adalah...", opts: ["Hitam", "Merah", "Putih", "Kuning"], ans: 0 },
+        { q: "Rantai pada sila kedua melambangkan...", opts: ["Pengekangan", "Hubungan manusia yang saling membantu", "Kekuatan militer", "Ikatan ekonomi"], ans: 1 },
+        { q: "Piagam Jakarta dirumuskan pada tanggal...", opts: ["22 Juni 1945", "1 Juni 1945", "18 Agustus 1945", "17 Agustus 1945"], ans: 0 },
+        { q: "Padi pada lambang sila kelima bermakna...", opts: ["Kecukupan pangan", "Kecukupan sandang", "Kekayaan hutan", "Kemakmuran laut"], ans: 0 },
+        { q: "Jumlah bulu pada masing-masing sayap Garuda Pancasila adalah...", opts: ["17", "8", "19", "45"], ans: 0 },
+        { q: "Jumlah bulu pada ekor Garuda Pancasila adalah...", opts: ["8", "17", "19", "45"], ans: 0 },
+        { q: "Garuda Pancasila dirancang oleh...", opts: ["Soekarno", "Sultan Hamid II", "Moh Yamin", "Soepomo"], ans: 1 }
+    ],
+    setC: [
+        { q: "Panitia yang merumuskan Piagam Jakarta disebut...", opts: ["Panitia Sembilan", "PPKI", "BPUPKI", "Panitia Delapan"], ans: 0 },
+        { q: "Kata 'Pancasila' diambil dari bahasa...", opts: ["Sanskerta", "Jawa Kuno", "Melayu", "Sunda"], ans: 0 },
+        { q: "Burung Garuda menengok ke arah...", opts: ["Kiri", "Kanan", "Depan", "Atas"], ans: 1 },
+        { q: "Kapas pada lambang sila kelima bermakna...", opts: ["Kecukupan pangan", "Kecukupan sandang", "Kekayaan alam", "Kelembutan hati"], ans: 1 },
+        { q: "Sila yang menekankan musyawarah mufakat adalah...", opts: ["Sila 2", "Sila 3", "Sila 4", "Sila 5"], ans: 2 },
+        { q: "Menjaga kerukunan antar umat beragama adalah pengamalan sila ke...", opts: ["1", "2", "3", "5"], ans: 0 },
+        { q: "Gotong royong merupakan cerminan dari sila...", opts: ["1", "2", "3", "4"], ans: 2 },
+        { q: "Membela tanah air adalah kewajiban yang sesuai dengan sila ke...", opts: ["1", "2", "3", "5"], ans: 2 },
+        { q: "Sikap adil terhadap sesama adalah pengamalan sila ke...", opts: ["2", "3", "4", "5"], ans: 3 },
+        { q: "Pancasila berkedudukan sebagai...", opts: ["Sumber dari segala sumber hukum", "Hukum adat", "Aturan internasional", "Kebijakan presiden"], ans: 0 }
+    ],
+    setD: [
+        { q: "Tidak memaksakan agama kepada orang lain adalah nilai sila ke...", opts: ["1", "2", "3", "4"], ans: 0 },
+        { q: "Suka menabung dan tidak boros adalah pengamalan sila ke...", opts: ["2", "3", "4", "5"], ans: 3 },
+        { q: "Berani membela kebenaran dan keadilan mencerminkan sila ke...", opts: ["1", "2", "3", "4"], ans: 1 },
+        { q: "Cinta tanah air dan bangsa mencerminkan sila ke...", opts: ["1", "2", "3", "4"], ans: 2 },
+        { q: "Menghargai hasil karya orang lain adalah nilai dari sila...", opts: ["2", "3", "4", "5"], ans: 3 },
+        { q: "Menerima dan melaksanakan hasil musyawarah adalah wujud sila ke...", opts: ["2", "3", "4", "5"], ans: 2 },
+        { q: "Rantai pada sila kedua terdiri atas mata rantai berbentuk...", opts: ["Bulat dan Kotak", "Segitiga dan Bulat", "Persegi dan Lingkaran", "Segilima dan Lingkaran"], ans: 2 },
+        { q: "Bintang emas bersudut...", opts: ["4", "5", "6", "8"], ans: 1 },
+        { q: "Teks Pancasila dibacakan saat upacara bendera oleh...", opts: ["Pembina upacara", "Pemimpin upacara", "Peserta upacara", "Ajudan"], ans: 0 },
+        { q: "Pancasila berfungsi sebagai pandangan hidup bangsa, artinya...", opts: ["Pedoman aktivitas sehari-hari", "Alat pengekang kebebasan", "Simbol negara semata", "Hafalan anak sekolah"], ans: 0 }
+    ]
+};
+
+const MAX_QUESTIONS = 10;
+
+function generateQuestions(selectedSet) {
+    let pool = questionsPool.setA;
+    if (questionsPool[selectedSet]) {
+        pool = questionsPool[selectedSet];
+    } else if (selectedSet === 'random') {
+        const sets = ['setA', 'setB', 'setC', 'setD'];
+        const randomSet = sets[Math.floor(Math.random() * sets.length)];
+        pool = questionsPool[randomSet];
+    }
+    // Randomize
+    return [...pool].sort(() => Math.random() - 0.5).slice(0, MAX_QUESTIONS);
+}
+
+// ==========================================
+// 4. UI ELEMENTS
+// ==========================================
 const lobbyScreen = document.getElementById('lobby-screen');
 const waitingScreen = document.getElementById('waiting-screen');
 const countdownScreen = document.getElementById('countdown-screen');
@@ -15,28 +113,9 @@ const countdownText = document.getElementById('countdown-text');
 const waitPlayerA = document.getElementById('wait-player-a');
 const waitPlayerB = document.getElementById('wait-player-b');
 
-// Settings & History Elements
-const btnSettings = document.getElementById('btn-settings');
-const historyModal = document.getElementById('history-modal');
-const closeHistory = document.getElementById('close-history');
-const historyList = document.getElementById('history-list');
-
-// Post-game Stats Elements
-const postGameStats = document.getElementById('post-game-stats');
-const statNameA = document.getElementById('stat-name-a');
-const statCorrectA = document.getElementById('stat-correct-a');
-const statTimeA = document.getElementById('stat-time-a');
-const statAvgA = document.getElementById('stat-avg-a');
-const statNameB = document.getElementById('stat-name-b');
-const statCorrectB = document.getElementById('stat-correct-b');
-const statTimeB = document.getElementById('stat-time-b');
-const statAvgB = document.getElementById('stat-avg-b');
-
-// Game Elements
 const headerArea = document.getElementById('header-area');
 const ropeArea = document.getElementById('rope-area');
 const quizArea = document.getElementById('quiz-area');
-
 const nameAEl = document.getElementById('name-a');
 const nameBEl = document.getElementById('name-b');
 const scoreAEl = document.getElementById('score-a');
@@ -56,383 +135,580 @@ const bgB = document.getElementById('bg-b');
 const endOverlay = document.getElementById('end-overlay');
 const endTitle = document.getElementById('end-title');
 
+// Stats Elements
+const postGameStats = document.getElementById('post-game-stats');
+const statNameA = document.getElementById('stat-name-a');
+const statCorrectA = document.getElementById('stat-correct-a');
+const statTimeA = document.getElementById('stat-time-a');
+const statAvgA = document.getElementById('stat-avg-a');
+const statNameB = document.getElementById('stat-name-b');
+const statCorrectB = document.getElementById('stat-correct-b');
+const statTimeB = document.getElementById('stat-time-b');
+const statAvgB = document.getElementById('stat-avg-b');
+
+// History Elements
+const btnSettings = document.getElementById('btn-settings');
+const historyModal = document.getElementById('history-modal');
+const closeHistory = document.getElementById('close-history');
+const historyList = document.getElementById('history-list');
+
 // Client State
 let myRoom = '';
 let myRole = ''; // 'host', 'A', or 'B'
 let isLocked = true; 
+let hostTimerInterval = null;
 
-// -- LOBBY LOGIC --
-
-// Settings / History Modal
-btnSettings.addEventListener('click', () => {
+// ==========================================
+// 4.5. HISTORY MODAL LOGIC
+// ==========================================
+btnSettings.addEventListener('click', async () => {
+    if (!db) return alert("Firebase belum dikonfigurasi!");
     historyModal.style.display = 'flex';
     historyList.innerHTML = '<p style="text-align:center; color:#aaa; margin-top:20px;">Memuat riwayat...</p>';
     
-    socket.emit('requestHistory', (response) => {
-        if (response.success) {
-            if (response.history.length === 0) {
-                historyList.innerHTML = '<p style="text-align:center; color:#aaa; margin-top:20px;">Belum ada pertandingan yang selesai.</p>';
-            } else {
-                historyList.innerHTML = '';
-                response.history.forEach(match => {
-                    let winClass = '';
-                    if (match.winner === match.nameA) winClass = 'win-a';
-                    else if (match.winner === match.nameB) winClass = 'win-b';
-                    
-                    const html = `
-                        <div class="history-item ${winClass}">
-                            <div class="history-info">
-                                <p style="font-size: 14px;">${match.date}</p>
-                                <strong>${match.nameA} vs ${match.nameB}</strong>
-                                <p style="font-size: 15px; margin-top: 5px;">Pemenang: <span style="color:#ffd700;">${match.winner}</span></p>
-                            </div>
-                            <div class="history-score" style="text-align: right; color: #fff;">
-                                <div style="font-size: 24px; font-weight: bold;">${match.scoreA} - ${match.scoreB}</div>
-                                <div style="font-size: 14px; color: #aaa;">Skor Akhir</div>
-                            </div>
-                        </div>
-                    `;
-                    historyList.innerHTML += html;
-                });
-            }
+    try {
+        const snap = await get(ref(db, 'history'));
+        if (!snap.exists()) {
+            historyList.innerHTML = '<p style="text-align:center; color:#aaa; margin-top:20px;">Belum ada riwayat pertandingan.</p>';
+            return;
         }
-    });
+        
+        const historyData = snap.val();
+        const historyArray = Object.values(historyData).sort((a, b) => b.timestamp - a.timestamp); // Sort by newest
+        
+        historyList.innerHTML = '';
+        historyArray.forEach(match => {
+            const dateStr = new Date(match.timestamp).toLocaleString('id-ID');
+            let winnerClass = '';
+            if (match.winner === match.teamA) winnerClass = 'win-a';
+            else if (match.winner === match.teamB) winnerClass = 'win-b';
+            
+            historyList.innerHTML += `
+                <div class="history-item ${winnerClass}">
+                    <div class="history-info">
+                        <p>${dateStr} - Room: ${match.roomCode}</p>
+                        <strong>${match.teamA} (${match.scoreA}) vs ${match.teamB} (${match.scoreB})</strong>
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="font-size:14px; margin:0; color:#aaa;">Pemenang</p>
+                        <strong style="color: #ffd700;">${match.winner}</strong>
+                    </div>
+                </div>
+            `;
+        });
+    } catch (e) {
+        historyList.innerHTML = '<p style="text-align:center; color:#ff4d4d; margin-top:20px;">Gagal memuat riwayat.</p>';
+    }
 });
 
 closeHistory.addEventListener('click', () => {
     historyModal.style.display = 'none';
 });
 
-window.addEventListener('click', (e) => {
-    if (e.target === historyModal) {
-        historyModal.style.display = 'none';
-    }
+// Tutup modal jika klik di luar kotak
+historyModal.addEventListener('click', (e) => {
+    if (e.target === historyModal) historyModal.style.display = 'none';
 });
 
-btnCreateRoom.addEventListener('click', () => {
-    const playerName = 'Host';
-    const questionSetSelect = document.getElementById('question-set-select');
-    const selectedSet = questionSetSelect.value;
-    socket.emit('createRoom', { playerName, selectedSet }, (response) => {
-        if (response.success) {
-            myRoom = response.roomCode;
-            myRole = response.role; // 'host'
-            lobbyScreen.style.display = 'none';
-            waitingScreen.style.display = 'flex';
-            displayRoomCode.innerText = myRoom;
-            
-            // Setup UI for Host
-            headerArea.style.display = 'flex';
-            ropeArea.style.display = 'flex';
-            quizArea.style.display = 'flex';
-            boxHost.style.display = 'block';
-            
-            // Hapus H3 PILIHAN JAWABAN jika ada (sudah dihapus di html tapi amankan di sini)
-            const h3Host = boxHost.querySelector('h3');
-            if(h3Host) h3Host.style.display = 'none';
-        }
-    });
+// ==========================================
+// 5. LOBBY LOGIC
+// ==========================================
+
+btnCreateRoom.addEventListener('click', async () => {
+    if(!db) return alert("Firebase belum dikonfigurasi! Harap buka file script.js dan masukkan konfigurasi Anda.");
+    
+    const selectedSet = document.getElementById('question-set-select').value;
+    const roomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+    
+    myRoom = roomCode;
+    myRole = 'host';
+    
+    const initialState = {
+        players: { A: null, B: null },
+        state: {
+            status: 'waiting',
+            ropePos: 50,
+            scoreA: 0,
+            scoreB: 0,
+            totalTimeA: 0,
+            totalTimeB: 0,
+            correctAnswersA: 0,
+            correctAnswersB: 0,
+            currentQIndex: 0,
+            questions: generateQuestions(selectedSet),
+            questionStartTime: 0,
+            timeLeft: 20,
+            actionTrigger: null // Untuk mentrigger animasi benar/salah
+        },
+        actions: { A: null, B: null }
+    };
+
+    await set(ref(db, 'rooms/' + roomCode), initialState);
+
+    // Setup UI
+    lobbyScreen.style.display = 'none';
+    waitingScreen.style.display = 'flex';
+    displayRoomCode.innerText = myRoom;
+    
+    headerArea.style.display = 'flex';
+    ropeArea.style.display = 'flex';
+    quizArea.style.display = 'flex';
+    boxHost.style.display = 'block';
+
+    listenToRoomAsHost(roomCode);
 });
 
-btnJoinRoom.addEventListener('click', () => {
-    const roomCode = roomCodeInput.value.trim();
+btnJoinRoom.addEventListener('click', async () => {
+    if(!db) return alert("Firebase belum dikonfigurasi! Harap buka file script.js dan masukkan konfigurasi Anda.");
+
+    const roomCode = roomCodeInput.value.trim().toUpperCase();
     const school = schoolSelect.value;
     
-    if (!roomCode) {
-        lobbyMessage.innerText = "Masukkan kode room!";
-        return;
-    }
-    if (!school) {
-        lobbyMessage.innerText = "Pilih sekolah Anda terlebih dahulu!";
-        return;
-    }
+    if (!roomCode) return lobbyMessage.innerText = "Masukkan kode room!";
+    if (!school) return lobbyMessage.innerText = "Pilih sekolah Anda!";
+    
     btnJoinRoom.disabled = true;
     
-    socket.emit('joinRoom', { roomCode, school }, (response) => {
+    const roomRef = ref(db, 'rooms/' + roomCode);
+    const snapshot = await get(roomRef);
+    
+    if (!snapshot.exists()) {
         btnJoinRoom.disabled = false;
-        if (response.success) {
-            myRoom = response.roomCode;
-            myRole = response.role; // 'A' or 'B'
-            lobbyScreen.style.display = 'none';
-            waitingScreen.style.display = 'flex';
-            displayRoomCode.innerText = myRoom;
+        return lobbyMessage.innerText = "Room tidak ditemukan!";
+    }
+    
+    const roomData = snapshot.val();
+    if (roomData.state.status !== 'waiting') {
+        btnJoinRoom.disabled = false;
+        return lobbyMessage.innerText = "Game sudah dimulai atau room penuh!";
+    }
 
-            // Setup UI for Players
-            headerArea.style.display = 'none'; 
-            ropeArea.style.display = 'none'; 
-            quizArea.style.display = 'flex'; 
-            
-            if (myRole === 'A') {
-                boxA.style.display = 'block';
-                boxB.style.display = 'none';
-            } else if (myRole === 'B') {
-                boxA.style.display = 'none';
-                boxB.style.display = 'block';
-            }
-        } else {
-            lobbyMessage.innerText = response.message;
+    let assignedRole = null;
+    if (!roomData.players || !roomData.players.A) assignedRole = 'A';
+    else if (!roomData.players.B) assignedRole = 'B';
+    else {
+        btnJoinRoom.disabled = false;
+        return lobbyMessage.innerText = "Room sudah penuh (2 Pemain sudah masuk)!";
+    }
+
+    myRoom = roomCode;
+    myRole = assignedRole;
+    
+    await update(ref(db, `rooms/${roomCode}/players/${assignedRole}`), { name: school });
+
+    lobbyScreen.style.display = 'none';
+    waitingScreen.style.display = 'flex';
+    displayRoomCode.innerText = myRoom;
+
+    headerArea.style.display = 'flex'; 
+    ropeArea.style.display = 'none'; 
+    quizArea.style.display = 'flex'; 
+    
+    if (myRole === 'A') { boxA.style.display = 'block'; boxB.style.display = 'none'; }
+    if (myRole === 'B') { boxA.style.display = 'none'; boxB.style.display = 'block'; }
+
+    listenToRoomAsPlayer(roomCode);
+});
+
+// ==========================================
+// 6. HOST LOGIC (Bertindak sebagai Server)
+// ==========================================
+function listenToRoomAsHost(roomCode) {
+    const roomRef = ref(db, 'rooms/' + roomCode);
+    let hasStarted = false;
+    let lastActionTimestamp = 0;
+
+    onValue(roomRef, (snapshot) => {
+        const data = snapshot.val();
+        if(!data) return;
+
+        // Start Game if both players joined
+        if (!hasStarted && data.players && data.players.A && data.players.B && data.state.status === 'waiting') {
+            hasStarted = true;
+            startGameAsHost(roomCode, data);
+        }
+
+        // Host Handles Answers
+        if (data.state.status === 'playing' && data.actions) {
+            handlePlayerAnswersAsHost(roomCode, data);
+        }
+        
+        // Update UI Host
+        renderState(data);
+
+        // Tampilkan feedback jawaban di Host (Projector)
+        if (data.state.actionTrigger && data.state.actionTrigger.timestamp > lastActionTimestamp) {
+            lastActionTimestamp = data.state.actionTrigger.timestamp;
+            renderFeedback(data.state.actionTrigger);
         }
     });
-});
+}
 
-// -- SOCKET EVENT LISTENERS --
+function startGameAsHost(roomCode, data) {
+    update(ref(db, `rooms/${roomCode}/state`), { status: 'countdown' });
+    
+    setTimeout(() => {
+        update(ref(db, `rooms/${roomCode}/state`), { 
+            status: 'playing',
+            questionStartTime: Date.now(),
+            timeLeft: 20
+        });
+        startHostTimer(roomCode);
+    }, 4000); // 4 detik countdown
+}
 
-socket.on('playerJoined', (data) => {
-    if (data.players.A) {
-        waitPlayerA.innerText = data.players.A.name;
-        waitPlayerA.style.color = '#ff7777';
+function startHostTimer(roomCode) {
+    clearInterval(hostTimerInterval);
+    hostTimerInterval = setInterval(async () => {
+        const snap = await get(ref(db, `rooms/${roomCode}/state`));
+        if(!snap.exists()) return clearInterval(hostTimerInterval);
+        
+        let state = snap.val();
+        if(state.status !== 'playing') return clearInterval(hostTimerInterval);
+
+        let newTime = state.timeLeft - 1;
+        
+        if (newTime <= 0) {
+            clearInterval(hostTimerInterval);
+            handleTimeUpAsHost(roomCode, state);
+        } else {
+            update(ref(db, `rooms/${roomCode}/state`), { timeLeft: newTime });
+        }
+    }, 1000);
+}
+
+async function handlePlayerAnswersAsHost(roomCode, data) {
+    const state = data.state;
+    const actions = data.actions;
+    const currentQ = state.questions[state.currentQIndex];
+
+    let actionTrigger = null;
+
+    if (actions.A) {
+        clearInterval(hostTimerInterval); // Stop timer
+        const isCorrect = (actions.A.answerIndex === currentQ.ans);
+        const timeTaken = Date.now() - state.questionStartTime;
+        
+        if(isCorrect) {
+            state.scoreA += 10; state.ropePos -= 10; state.totalTimeA += timeTaken; state.correctAnswersA++;
+        }
+        actionTrigger = { team: 'A', isCorrect, answerIndex: actions.A.answerIndex, correctAnswerIndex: currentQ.ans, timestamp: Date.now() };
+        
+        await update(ref(db, `rooms/${roomCode}/actions`), { A: null }); // Clear action
+        proceedToNextQuestion(roomCode, state, actionTrigger);
+    } 
+    else if (actions.B) {
+        clearInterval(hostTimerInterval);
+        const isCorrect = (actions.B.answerIndex === currentQ.ans);
+        const timeTaken = Date.now() - state.questionStartTime;
+        
+        if(isCorrect) {
+            state.scoreB += 10; state.ropePos += 10; state.totalTimeB += timeTaken; state.correctAnswersB++;
+        }
+        actionTrigger = { team: 'B', isCorrect, answerIndex: actions.B.answerIndex, correctAnswerIndex: currentQ.ans, timestamp: Date.now() };
+        
+        await update(ref(db, `rooms/${roomCode}/actions`), { B: null }); // Clear action
+        proceedToNextQuestion(roomCode, state, actionTrigger);
     }
-    if (data.players.B) {
-        waitPlayerB.innerText = data.players.B.name;
-        waitPlayerB.style.color = '#ffffff';
+}
+
+function handleTimeUpAsHost(roomCode, state) {
+    const currentQ = state.questions[state.currentQIndex];
+    const actionTrigger = { team: 'none', isCorrect: false, answerIndex: -1, correctAnswerIndex: currentQ.ans, timestamp: Date.now() };
+    proceedToNextQuestion(roomCode, state, actionTrigger);
+}
+
+function proceedToNextQuestion(roomCode, state, actionTrigger) {
+    state.currentQIndex++;
+    state.actionTrigger = actionTrigger; // Beritahu client soal jawaban
+    
+    if (state.ropePos <= 0 || state.ropePos >= 100 || state.currentQIndex >= MAX_QUESTIONS) {
+        state.status = 'ended';
+        update(ref(db, `rooms/${roomCode}/state`), state);
+    } else {
+        state.status = 'transition';
+        update(ref(db, `rooms/${roomCode}/state`), state);
+        
+        setTimeout(() => {
+            state.status = 'playing';
+            state.questionStartTime = Date.now();
+            state.timeLeft = 20;
+            update(ref(db, `rooms/${roomCode}/state`), state);
+            startHostTimer(roomCode);
+        }, 2500); // 2.5 detik jeda antar soal
     }
-});
+}
 
-socket.on('gameStart', (data) => {
-    waitingScreen.style.display = 'none';
-    countdownScreen.style.display = 'flex';
-    
-    nameAEl.innerText = `${data.players.A.name} (MERAH)`;
-    nameBEl.innerText = `${data.players.B.name} (PUTIH)`;
-    vsText.innerText = `${data.players.A.name} VS ${data.players.B.name}`;
+// ==========================================
+// 7. PLAYER LOGIC
+// ==========================================
+function listenToRoomAsPlayer(roomCode) {
+    const roomRef = ref(db, 'rooms/' + roomCode);
+    let lastActionTimestamp = 0;
 
-    let count = 3;
-    countdownText.innerText = count;
-    countdownText.style.display = 'block';
+    onValue(roomRef, (snapshot) => {
+        const data = snapshot.val();
+        if(!data) return;
+
+        renderState(data);
+
+        // Handle feedback jawaban dari Host (menggunakan actionTrigger)
+        if (data.state.actionTrigger && data.state.actionTrigger.timestamp > lastActionTimestamp) {
+            lastActionTimestamp = data.state.actionTrigger.timestamp;
+            renderFeedback(data.state.actionTrigger);
+        }
+    });
+}
+
+window.handleMouseClick = function(idx) {
+    if (isLocked || myRole === 'host') return;
+    isLocked = true;
     
-    // Trigger animation awal
-    countdownText.classList.remove('animate-pop');
-    void countdownText.offsetWidth; // Reflow
-    countdownText.classList.add('animate-pop');
+    // Matikan semua tombol sementara
+    const btns = document.querySelectorAll('.option');
+    btns.forEach(btn => btn.disabled = true);
     
-    const countInterval = setInterval(() => {
-        count--;
-        if (count > 0) {
+    // Kirim aksi ke Firebase
+    update(ref(db, `rooms/${myRoom}/actions`), {
+        [myRole]: { answerIndex: idx, timestamp: Date.now() }
+    });
+};
+
+// ==========================================
+// 8. RENDERER UMUM (Untuk Host & Player)
+// ==========================================
+function renderState(data) {
+    const state = data.state;
+
+    // Update Lobby Player Names untuk Semua Layar
+    if (data.players) {
+        if(data.players.A) { waitPlayerA.innerText = data.players.A.name; waitPlayerA.style.color = '#ff7777'; }
+        if(data.players.B) { waitPlayerB.innerText = data.players.B.name; waitPlayerB.style.color = '#ffffff'; }
+    }
+
+    // Nama & Skor
+    if(data.players) {
+        nameAEl.innerText = `${data.players.A ? data.players.A.name : 'Tim Merah'} (MERAH)`;
+        nameBEl.innerText = `${data.players.B ? data.players.B.name : 'Tim Putih'} (PUTIH)`;
+    }
+    scoreAEl.innerText = state.scoreA;
+    scoreBEl.innerText = state.scoreB;
+    indicator.style.left = Math.max(0, Math.min(100, state.ropePos)) + '%';
+    
+    timerText.innerText = state.timeLeft;
+    if (state.timeLeft <= 5) timerText.classList.add('danger');
+    else timerText.classList.remove('danger');
+
+    // Layar Menunggu
+    if (state.status === 'waiting') {
+        waitingScreen.style.display = 'flex';
+        countdownScreen.style.display = 'none';
+    } 
+    // Countdown Awal
+    else if (state.status === 'countdown') {
+        waitingScreen.style.display = 'none';
+        countdownScreen.style.display = 'flex';
+        vsText.innerText = `${nameAEl.innerText} VS ${nameBEl.innerText}`;
+        
+        if (!countdownText.dataset.started) {
+            countdownText.dataset.started = "true";
+            let count = 3;
             countdownText.innerText = count;
+            countdownText.style.display = 'block';
+            
             countdownText.classList.remove('animate-pop');
             void countdownText.offsetWidth; // Reflow
             countdownText.classList.add('animate-pop');
-        } else if (count === 0) {
-            countdownText.innerText = "MULAI!";
-            countdownText.style.color = "#28a745"; // Ubah warna jadi hijau saat mulai
-            countdownText.classList.remove('animate-pop');
-            void countdownText.offsetWidth;
-            countdownText.classList.add('animate-pop');
-        } else {
-            clearInterval(countInterval);
-            countdownScreen.style.display = 'none';
-            countdownText.style.color = "#ffd700"; // Kembalikan ke warna emas
+            
+            const countInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownText.innerText = count;
+                    countdownText.classList.remove('animate-pop');
+                    void countdownText.offsetWidth;
+                    countdownText.classList.add('animate-pop');
+                } else if (count === 0) {
+                    countdownText.innerText = "MULAI!";
+                    countdownText.style.color = "#28a745";
+                    countdownText.classList.remove('animate-pop');
+                    void countdownText.offsetWidth;
+                    countdownText.classList.add('animate-pop');
+                } else {
+                    clearInterval(countInterval);
+                    countdownText.dataset.started = ""; // Reset
+                    countdownText.style.color = "#ffd700";
+                }
+            }, 1000);
         }
-    }, 1000);
-});
+    } 
+    // Sedang Bermain
+    else if (state.status === 'playing') {
+        waitingScreen.style.display = 'none';
+        countdownScreen.style.display = 'none';
+        renderQuestion(state);
+    } 
+    // Jeda antar soal
+    else if (state.status === 'transition') {
+        isLocked = true;
+    }
+    // Selesai
+    else if (state.status === 'ended') {
+        renderGameOver(data);
+    }
+}
 
-socket.on('newQuestion', (data) => {
-    isLocked = false;
+let lastRenderedQIndex = -1;
+
+function renderQuestion(state) {
+    if (state.currentQIndex >= MAX_QUESTIONS) return;
     
-    // Update Question
-    if (data.img && data.img !== null) {
-        questionImgEl.src = data.img;
-        questionImgEl.style.display = 'block';
+    // Hindari render ulang opsi jika soal belum berubah
+    if (lastRenderedQIndex === state.currentQIndex) return;
+    lastRenderedQIndex = state.currentQIndex;
+
+    isLocked = false;
+    const currentQ = state.questions[state.currentQIndex];
+    
+    questionTextEl.innerText = `Soal ${state.currentQIndex + 1}/${MAX_QUESTIONS}:\n${currentQ.q}`;
+    if (currentQ.img) {
+        questionImgEl.src = currentQ.img; questionImgEl.style.display = 'block';
     } else {
-        questionImgEl.removeAttribute('src');
         questionImgEl.style.display = 'none';
     }
-    
-    questionTextEl.innerText = `Soal ${data.questionNumber}/${data.totalQuestions}:\n${data.q}`;
 
     const hints = ['A', 'B', 'C', 'D'];
-
+    
     if (myRole === 'host') {
-        // RENDER HOST (DISABLED)
         optionsHostContainer.innerHTML = '';
-        data.opts.forEach((opt, idx) => {
+        currentQ.opts.forEach((opt, idx) => {
             optionsHostContainer.innerHTML += `
                 <button class="option disabled-option" id="opt-host-${idx}" disabled="true">
-                    <span class="key-hint hint-b">${hints[idx]}</span>
-                    <span class="opt-text">${opt}</span>
-                </button>
-            `;
+                    <span class="key-hint hint-b">${hints[idx]}</span><span class="opt-text">${opt}</span>
+                </button>`;
         });
     } else {
-        // RENDER PEMAIN (INTERAKTIF)
         optionsAContainer.innerHTML = '';
         optionsBContainer.innerHTML = '';
-        
-        data.opts.forEach((opt, idx) => {
-            if (myRole === 'A') {
-                optionsAContainer.innerHTML += `
-                    <button class="option" id="opt-${idx}" onclick="handleMouseClick(${idx})">
-                        <span class="key-hint hint-a">${hints[idx]}</span>
-                        <span class="opt-text">${opt}</span>
-                    </button>
-                `;
-            } else if (myRole === 'B') {
-                optionsBContainer.innerHTML += `
-                    <button class="option" id="opt-${idx}" onclick="handleMouseClick(${idx})">
-                        <span class="key-hint hint-b">${hints[idx]}</span>
-                        <span class="opt-text">${opt}</span>
-                    </button>
-                `;
-            }
+        currentQ.opts.forEach((opt, idx) => {
+            const btnHTML = `
+                <button class="option" id="opt-${idx}" onclick="handleMouseClick(${idx})">
+                    <span class="key-hint ${myRole==='A' ? 'hint-a' : 'hint-b'}">${hints[idx]}</span>
+                    <span class="opt-text">${opt}</span>
+                </button>`;
+            if (myRole === 'A') optionsAContainer.innerHTML += btnHTML;
+            if (myRole === 'B') optionsBContainer.innerHTML += btnHTML;
         });
     }
-});
+}
 
-socket.on('timerUpdate', (timeLeft) => {
-    timerText.innerText = timeLeft;
-    if (timeLeft <= 5) {
-        timerText.classList.add('danger');
-    } else {
-        timerText.classList.remove('danger');
+function renderFeedback(actionTrigger) {
+    const { team, isCorrect, answerIndex, correctAnswerIndex } = actionTrigger;
+
+    if (team === 'none') {
+        // Waktu habis
+        questionTextEl.innerText = "WAKTU HABIS! Soal Dilewati...";
+        const correctEl = document.getElementById(myRole === 'host' ? `opt-host-${correctAnswerIndex}` : `opt-${correctAnswerIndex}`);
+        if (correctEl) correctEl.classList.add('correct');
+        return;
     }
-});
 
-socket.on('answerResult', (data) => {
-    const { team, answerIndex, isCorrect, correctAnswerIndex, newState } = data;
-    updateGameState(newState);
-
+    // Ada yang menjawab
     if (myRole === 'host') {
         const optEl = document.getElementById('opt-host-' + answerIndex);
         if (optEl) {
-            if (isCorrect) {
-                optEl.classList.add('correct');
-            } else {
+            if (isCorrect) optEl.classList.add('correct');
+            else {
                 optEl.classList.add('wrong');
                 const correctEl = document.getElementById('opt-host-' + correctAnswerIndex);
                 if (correctEl) correctEl.classList.add('correct');
             }
         }
-
-        if (isCorrect) {
-            if (team === 'A') flashBg(bgA, 'flash-green');
-            else flashBg(bgB, 'flash-green');
-        } else {
-            if (team === 'A') flashBg(bgA, 'flash-red');
-            else flashBg(bgB, 'flash-red');
-        }
-    } 
-    else {
-        // Disable tombol setelah menjawab
-        isLocked = true; 
-        
+        flashBg(team === 'A' ? bgA : bgB, isCorrect ? 'flash-green' : 'flash-red');
+    } else {
         if (team === myRole) {
             const optEl = document.getElementById('opt-' + answerIndex);
             if (optEl) {
-                if (myRole === 'A') optEl.classList.add('selected-a');
-                if (myRole === 'B') optEl.classList.add('selected-b');
-                
-                if (isCorrect) {
-                    optEl.classList.add('correct');
-                    flashBg(myRole === 'A' ? bgA : bgB, 'flash-green');
-                } else {
+                optEl.classList.add(myRole === 'A' ? 'selected-a' : 'selected-b');
+                if (isCorrect) optEl.classList.add('correct');
+                else {
                     optEl.classList.add('wrong');
-                    flashBg(myRole === 'A' ? bgA : bgB, 'flash-red');
                     const correctEl = document.getElementById('opt-' + correctAnswerIndex);
                     if (correctEl) correctEl.classList.add('correct');
                 }
             }
-        }
-    }
-});
-
-socket.on('timeUp', (data) => {
-    isLocked = true;
-    questionImgEl.style.display = 'none';
-    questionTextEl.innerText = "WAKTU HABIS! Soal Dilewati...";
-    updateGameState(data.newState);
-    
-    // Show correct answer
-    if (myRole === 'host') {
-        const correctEl = document.getElementById('opt-host-' + data.correctAnswerIndex);
-        if (correctEl) correctEl.classList.add('correct');
-    } else {
-        const correctEl = document.getElementById('opt-' + data.correctAnswerIndex);
-        if (correctEl) correctEl.classList.add('correct');
-    }
-});
-
-socket.on('gameOver', (data) => {
-    endOverlay.classList.add('active');
-    updateGameState(data);
-    
-    const nameA = data.nameA || "Tim Merah";
-    const nameB = data.nameB || "Tim Putih";
-    
-    if (data.correctAnswersA > data.correctAnswersB) {
-        endTitle.innerHTML = `Selamat ${nameA} (MERAH) Menang!<br><span style='font-size:36px; font-weight:normal; color:#fff;'>Tarik Tambang Dimenangkan!</span>`;
-        endTitle.className = 'win-a';
-    } else if (data.correctAnswersB > data.correctAnswersA) {
-        endTitle.innerHTML = `Selamat ${nameB} (PUTIH) Menang!<br><span style='font-size:36px; font-weight:normal; color:#ddd;'>Tarik Tambang Dimenangkan!</span>`;
-        endTitle.className = 'win-b';
-    } else {
-        // Draw logic - compare time
-        if (data.totalTimeA < data.totalTimeB) {
-            endTitle.innerHTML = `Selamat ${nameA} (MERAH) Menang!<br><span style='font-size:36px; font-weight:normal; color:#fff;'>Menang Waktu Tercepat!</span>`;
-            endTitle.className = 'win-a';
-        } else if (data.totalTimeB < data.totalTimeA) {
-            endTitle.innerHTML = `Selamat ${nameB} (PUTIH) Menang!<br><span style='font-size:36px; font-weight:normal; color:#ddd;'>Menang Waktu Tercepat!</span>`;
-            endTitle.className = 'win-b';
+            flashBg(myRole === 'A' ? bgA : bgB, isCorrect ? 'flash-green' : 'flash-red');
         } else {
-            endTitle.innerHTML = "PERTANDINGAN SERI!<br><span style='font-size:36px; font-weight:normal; color:#ffd700;'>Skor dan Waktu Imbang!</span>";
-            endTitle.className = 'win-draw';
+            // Lawan menjawab duluan (tampilkan jawaban yang benar saja)
+            questionTextEl.innerText = "Lawan Menjawab Duluan!";
+            const correctEl = document.getElementById('opt-' + correctAnswerIndex);
+            if (correctEl) correctEl.classList.add('correct');
+            flashBg(team === 'A' ? bgA : bgB, isCorrect ? 'flash-green' : 'flash-red');
         }
     }
-
-    // Render Stats
-    statNameA.innerText = nameA;
-    statNameB.innerText = nameB;
-    
-    statCorrectA.innerText = data.correctAnswersA || 0;
-    statCorrectB.innerText = data.correctAnswersB || 0;
-    
-    const timeSecA = Math.round((data.totalTimeA || 0) / 1000);
-    const timeSecB = Math.round((data.totalTimeB || 0) / 1000);
-    statTimeA.innerText = `${timeSecA}s`;
-    statTimeB.innerText = `${timeSecB}s`;
-    
-    const avgA = data.correctAnswersA > 0 ? (timeSecA / data.correctAnswersA).toFixed(1) : 0;
-    const avgB = data.correctAnswersB > 0 ? (timeSecB / data.correctAnswersB).toFixed(1) : 0;
-    
-    statAvgA.innerText = `${avgA}s`;
-    statAvgB.innerText = `${avgB}s`;
-    
-    // Highlight the faster average if both have answers
-    if (data.correctAnswersA > 0 && data.correctAnswersB > 0) {
-        if (parseFloat(avgA) < parseFloat(avgB)) {
-            statAvgA.classList.add('highlight');
-        } else if (parseFloat(avgB) < parseFloat(avgA)) {
-            statAvgB.classList.add('highlight');
-        }
-    }
-    
-    postGameStats.style.display = 'flex';
-});
-
-// -- INPUT HANDLING --
-
-function handleMouseClick(idx) {
-    if (isLocked || myRole === 'host') return;
-    isLocked = true;
-    
-    // Disable semua tombol secara visual sesaat setelah di-klik (sebelum nunggu balasan server)
-    const btns = document.querySelectorAll('.option');
-    btns.forEach(btn => btn.disabled = true);
-    
-    socket.emit('answer', { roomCode: myRoom, team: myRole, answerIndex: idx });
 }
 
-// -- HELPERS --
+function renderGameOver(data) {
+    const state = data.state;
+    endOverlay.classList.add('active');
+    
+    const nameA = data.players.A ? data.players.A.name : "Tim Merah";
+    const nameB = data.players.B ? data.players.B.name : "Tim Putih";
+    
+    if (state.correctAnswersA > state.correctAnswersB) {
+        endTitle.innerHTML = `Selamat ${nameA} Menang!`; endTitle.className = 'win-a';
+    } else if (state.correctAnswersB > state.correctAnswersA) {
+        endTitle.innerHTML = `Selamat ${nameB} Menang!`; endTitle.className = 'win-b';
+    } else {
+        if (state.totalTimeA < state.totalTimeB) {
+            endTitle.innerHTML = `Selamat ${nameA} Menang (Tercepat)!`; endTitle.className = 'win-a';
+        } else if (state.totalTimeB < state.totalTimeA) {
+            endTitle.innerHTML = `Selamat ${nameB} Menang (Tercepat)!`; endTitle.className = 'win-b';
+        } else {
+            endTitle.innerHTML = "SERI!"; endTitle.className = 'win-draw';
+        }
+    }
 
-function updateGameState(state) {
-    scoreAEl.innerText = state.scoreA;
-    scoreBEl.innerText = state.scoreB;
-    indicator.style.left = Math.max(0, Math.min(100, state.ropePos)) + '%';
+    statNameA.innerText = nameA; statNameB.innerText = nameB;
+    statCorrectA.innerText = state.correctAnswersA; statCorrectB.innerText = state.correctAnswersB;
+    
+    const timeSecA = Math.round(state.totalTimeA / 1000); const timeSecB = Math.round(state.totalTimeB / 1000);
+    statTimeA.innerText = `${timeSecA}s`; statTimeB.innerText = `${timeSecB}s`;
+    
+    statAvgA.innerText = state.correctAnswersA > 0 ? (timeSecA / state.correctAnswersA).toFixed(1) + 's' : '0s';
+    statAvgB.innerText = state.correctAnswersB > 0 ? (timeSecB / state.correctAnswersB).toFixed(1) + 's' : '0s';
+    
+    postGameStats.style.display = 'flex';
+
+    // Host pushes to history
+    if (myRole === 'host') {
+        let winnerName = 'SERI';
+        if (state.correctAnswersA > state.correctAnswersB) winnerName = nameA;
+        else if (state.correctAnswersB > state.correctAnswersA) winnerName = nameB;
+        else {
+            if (state.totalTimeA < state.totalTimeB) winnerName = nameA;
+            else if (state.totalTimeB < state.totalTimeA) winnerName = nameB;
+        }
+
+        const matchRecord = {
+            timestamp: Date.now(),
+            roomCode: myRoom,
+            teamA: nameA,
+            teamB: nameB,
+            scoreA: state.scoreA,
+            scoreB: state.scoreB,
+            winner: winnerName
+        };
+
+        // Hindari push berulang jika renderGameOver dipanggil lebih dari sekali
+        if (!window.hasPushedHistory) {
+            window.hasPushedHistory = true;
+            push(ref(db, 'history'), matchRecord);
+        }
+    }
 }
 
 function flashBg(element, className) {
     if(!element) return;
     element.classList.add(className);
-    setTimeout(() => {
-        element.classList.remove(className);
-    }, 600);
+    setTimeout(() => element.classList.remove(className), 600);
 }
