@@ -680,12 +680,17 @@ function renderQuestion(state) {
     }
 }
 
-function renderFeedback(actionTrigger) {
+function renderFeedback(actionTrigger, state) {
     const { team, isCorrect, answerIndex, correctAnswerIndex, reveal } = actionTrigger;
+
+    let originalQ = "";
+    if (state && state.questions && state.questions[state.currentQIndex]) {
+        originalQ = `Soal ${state.currentQIndex + 1}/${MAX_QUESTIONS}:\n${state.questions[state.currentQIndex].q}\n\n`;
+    }
 
     if (team === 'none') {
         // Waktu habis
-        questionTextEl.innerText = "WAKTU HABIS! Soal Dilewati...";
+        questionTextEl.innerText = originalQ + ">>> WAKTU HABIS! Soal Dilewati... <<<";
         if (myRole === 'host') {
             const correctElA = document.getElementById(`opt-host-a-${correctAnswerIndex}`);
             const correctElB = document.getElementById(`opt-host-b-${correctAnswerIndex}`);
@@ -733,13 +738,13 @@ function renderFeedback(actionTrigger) {
         } else {
             // Lawan menjawab
             if (isCorrect) {
-                questionTextEl.innerText = "Lawan Menjawab Benar!";
+                questionTextEl.innerText = originalQ + ">>> Lawan Menjawab Benar! <<<";
                 isLocked = true;
                 const correctEl = document.getElementById('opt-' + correctAnswerIndex);
                 if (correctEl) correctEl.classList.add('correct');
                 flashBg(team === 'A' ? bgA : bgB, 'flash-green');
             } else {
-                questionTextEl.innerText = "Lawan Menjawab Salah! Kesempatan Anda!";
+                questionTextEl.innerText = originalQ + ">>> Lawan Menjawab Salah! Kesempatan Anda! <<<";
                 const optEl = document.getElementById('opt-' + answerIndex);
                 if (optEl) optEl.classList.add('wrong');
                 if (reveal) {
