@@ -23,13 +23,14 @@
                 <div class="action-card">
                     <h4>Buat Room Baru</h4>
                     <p>Anda akan menjadi <strong>HOST (Proyektor)</strong>. Tidak ikut bermain, hanya menampilkan tali & skor.</p>
-                    <select id="question-set-select" class="lobby-select">
+                    <select id="question-set-select" class="lobby-select" style="margin-bottom: 20px;">
                         <option value="random">Acak (Semua Tipe)</option>
                         <option value="setA">Tipe Soal 1</option>
                         <option value="setB">Tipe Soal 2</option>
                         <option value="setC">Tipe Soal 3</option>
                         <option value="setD">Tipe Soal 4</option>
                     </select>
+                    <input type="password" id="host-password-input" placeholder="Password Host" style="margin-bottom: 20px; width: 100%; max-width: 400px; padding: 15px; font-size: 20px; border-radius: 10px; border: none; text-align: center;">
                     <button id="btn-create-room" class="btn-primary">Buat Room (Host)</button>
                 </div>
                 
@@ -60,6 +61,9 @@
         <div id="players-status" style="margin-top: 30px; font-size: 20px; color: #fff;">
             <p>Player 1 (Merah): <span id="wait-player-a">Menunggu...</span></p>
             <p>Player 2 (Putih): <span id="wait-player-b">Menunggu...</span></p>
+        </div>
+        <div id="host-controls" style="display: none; margin-top: 30px;">
+            <button id="btn-start-game" class="btn-primary" style="font-size: 24px; padding: 15px 40px; box-shadow: 0 0 15px #ffd700; cursor: pointer;">MULAI GAME</button>
         </div>
     </div>
 

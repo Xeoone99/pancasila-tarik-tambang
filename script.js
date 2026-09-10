@@ -32,16 +32,26 @@ if (firebaseConfig.apiKey) {
 // ==========================================
 const questionsPool = {
     setA: [
-        { q: "Sila pertama Pancasila dilambangkan dengan...", opts: ["Bintang", "Rantai", "Pohon Beringin", "Kepala Banteng"], ans: 0 },
-        { q: "Sila kedua berbunyi...", opts: ["Ketuhanan Yang Maha Esa", "Kemanusiaan yang adil dan beradab", "Persatuan Indonesia", "Keadilan sosial"], ans: 1 },
-        { q: "Lambang Pohon Beringin memiliki makna...", opts: ["Kekuatan otot", "Tempat berteduh dan persatuan", "Kekayaan alam", "Kejayaan masa lalu"], ans: 1 },
-        { q: "Sila keempat dipimpin oleh...", opts: ["Hikmat kebijaksanaan", "Presiden dan Wakil", "Rakyat", "MPR dan DPR"], ans: 0 },
-        { q: "Keadilan sosial bagi seluruh rakyat Indonesia dilambangkan dengan...", opts: ["Padi dan Kapas", "Pohon Beringin", "Bintang Emas", "Rantai Baja"], ans: 0 },
-        { q: "Pancasila lahir pada tanggal...", opts: ["1 Juni 1945", "17 Agustus 1945", "18 Agustus 1945", "10 November 1945"], ans: 0 },
-        { q: "Siapakah penggali Pancasila?", opts: ["Moh. Hatta", "Soekarno", "Ki Hajar Dewantara", "Ahmad Yani"], ans: 1 },
-        { q: "Semboyan Bhinneka Tunggal Ika terdapat pada kitab...", opts: ["Sutasoma", "Negarakertagama", "Arjuna Wiwaha", "Ramayana"], ans: 0 },
-        { q: "Bhinneka Tunggal Ika berarti...", opts: ["Berbeda-beda tapi satu", "Bersatu kita teguh", "Merdeka atau mati", "Satu nusa satu bangsa"], ans: 0 },
-        { q: "Pancasila sebagai dasar negara disahkan pada...", opts: ["18 Agustus 1945", "1 Juni 1945", "22 Juni 1945", "17 Agustus 1945"], ans: 0 }
+        { q: "Pancasila bagi bangsa Indonesia berkedudukan sebagai ....", opts: ["dasar negara dan pandangan hidup bangsa", "peraturan pemerintah", "hukum daerah", "semboyan negara"], ans: 0 },
+        { q: "Sikap yang sesuai dengan sila pertama Pancasila di lingkungan sekolah adalah ....", opts: ["memaksakan agama kepada teman", "menghormati teman yang sedang menjalankan ibadah", "memilih teman berdasarkan agama", "melarang teman menjalankan ibadah"], ans: 1 },
+        { q: "Ketika terjadi perbedaan pendapat dalam kelompok, sikap yang sesuai dengan nilai Pancasila adalah ....", opts: ["memaksakan pendapat sendiri", "meninggalkan kelompok", "bermusyawarah untuk mencapai mufakat", "menyerahkan keputusan kepada satu orang"], ans: 2 },
+        { q: "Semboyan Bhinneka Tunggal Ika memiliki arti ....", opts: ["bersatu kita teguh", "berbeda-beda tetapi tetap satu", "satu bangsa satu budaya", "bersama membangun negara"], ans: 1 },
+        { q: "Indonesia memiliki banyak suku, agama, bahasa, dan budaya. Sikap yang tepat terhadap keberagaman tersebut adalah ....", opts: ["menganggap budaya sendiri paling unggul", "menghindari orang yang berbeda suku", "menghargai dan menghormati perbedaan", "memaksakan budaya sendiri kepada orang lain"], ans: 2 },
+        { q: "Contoh perilaku yang dapat memperkuat persatuan di sekolah adalah ....", opts: ["membentuk kelompok berdasarkan suku", "memilih teman berdasarkan status sosial", "bekerja sama dalam kegiatan gotong royong", "mengejek budaya daerah lain"], ans: 2 },
+        { q: "Negara Indonesia berbentuk ....", opts: ["kerajaan", "republik", "federasi", "monarki"], ans: 1 },
+        { q: "Salah satu bentuk bela negara yang dapat dilakukan oleh pelajar adalah ....", opts: ["mengikuti tawuran", "menaati tata tertib dan belajar dengan sungguh-sungguh", "menyebarkan berita bohong", "merusak fasilitas umum"], ans: 1 },
+        { q: "Menjaga keutuhan Negara Kesatuan Republik Indonesia merupakan tanggung jawab ....", opts: ["TNI saja", "pemerintah saja", "aparat keamanan saja", "seluruh warga negara"], ans: 3 },
+        { q: "Perilaku yang menunjukkan rasa cinta tanah air adalah ....", opts: ["merusak fasilitas umum", "menghargai budaya dan produk dalam negeri", "merendahkan budaya daerah sendiri", "tidak peduli terhadap lingkungan"], ans: 1 },
+        { q: "UUD Negara Republik Indonesia Tahun 1945 memiliki kedudukan sebagai ....", opts: ["hukum dasar negara", "peraturan sekolah", "hukum adat", "peraturan daerah"], ans: 0 },
+        { q: "Contoh kewajiban seorang pelajar sebagai bagian dari warga negara adalah ....", opts: ["mendapatkan pendidikan", "mendapatkan perlindungan", "menaati peraturan yang berlaku", "memperoleh penghargaan"], ans: 2 },
+        { q: "Seorang siswa menemukan informasi yang belum jelas kebenarannya di media sosial. Sikap yang tepat adalah ....", opts: ["langsung menyebarkannya", "menambahkan komentar provokatif", "memeriksa kebenarannya terlebih dahulu", "mengirimkannya ke semua grup"], ans: 2 },
+        { q: "Berita palsu yang sengaja dibuat dan disebarkan untuk menyesatkan masyarakat disebut ....", opts: ["fakta", "opini", "hoaks", "aspirasi"], ans: 2 },
+        { q: "Gotong royong merupakan salah satu sikap yang penting dalam kehidupan berbangsa karena ....", opts: ["menumbuhkan kerja sama dan persatuan", "membuat seseorang menjadi lebih berkuasa", "menghilangkan keberagaman", "mengutamakan kepentingan pribadi"], ans: 0 },
+        { q: "Jika ada teman yang berbeda suku atau budaya diejek oleh teman lainnya, tindakan yang paling tepat adalah ....", opts: ["ikut mengejek", "membiarkannya", "menegur dan mengajak menghargai perbedaan", "membalas dengan mengejek suku pelaku"], ans: 2 },
+        { q: "Dalam kehidupan demokratis, perbedaan pendapat sebaiknya diselesaikan melalui ....", opts: ["kekerasan", "musyawarah", "ancaman", "pemaksaan"], ans: 1 },
+        { q: "Salah satu bentuk penggunaan kemerdekaan berpendapat yang bertanggung jawab adalah ....", opts: ["menyampaikan pendapat dengan sopan dan berdasarkan fakta", "menghina orang yang berbeda pendapat", "menyebarkan fitnah", "memaksakan pendapat kepada orang lain"], ans: 0 },
+        { q: "Wawasan Nusantara mengajarkan bahwa wilayah Indonesia harus dipandang sebagai ....", opts: ["wilayah yang terpisah-pisah", "satu kesatuan wilayah dan bangsa", "kumpulan daerah yang berdiri sendiri", "wilayah yang hanya terdiri dari pulau-pulau besar"], ans: 1 },
+        { q: "Perhatikan tindakan berikut: 1. Menghormati perbedaan agama. 2. Melaksanakan gotong royong. 3. Menyebarkan ujaran kebencian. 4. Menjaga fasilitas umum. Perilaku yang mencerminkan wawasan kebangsaan ditunjukkan oleh nomor ....", opts: ["1, 2, dan 4", "1, 3, dan 4", "2 dan 3", "3 dan 4"], ans: 0 }
     ],
     setB: [
         { q: "Dasar negara Indonesia adalah...", opts: ["UUD 1945", "Pancasila", "Bhinneka Tunggal Ika", "Tap MPR"], ans: 1 },
@@ -81,7 +91,7 @@ const questionsPool = {
     ]
 };
 
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 20;
 
 function generateQuestions(selectedSet) {
     let pool = questionsPool.setA;
@@ -103,6 +113,7 @@ const lobbyScreen = document.getElementById('lobby-screen');
 const waitingScreen = document.getElementById('waiting-screen');
 const countdownScreen = document.getElementById('countdown-screen');
 const roomCodeInput = document.getElementById('room-code-input');
+const hostPasswordInput = document.getElementById('host-password-input');
 const schoolSelect = document.getElementById('school-select');
 const btnCreateRoom = document.getElementById('btn-create-room');
 const btnJoinRoom = document.getElementById('btn-join-room');
@@ -112,6 +123,8 @@ const vsText = document.getElementById('vs-text');
 const countdownText = document.getElementById('countdown-text');
 const waitPlayerA = document.getElementById('wait-player-a');
 const waitPlayerB = document.getElementById('wait-player-b');
+const hostControls = document.getElementById('host-controls');
+const btnStartGame = document.getElementById('btn-start-game');
 
 const headerArea = document.getElementById('header-area');
 const ropeArea = document.getElementById('rope-area');
@@ -217,6 +230,10 @@ historyModal.addEventListener('click', (e) => {
 btnCreateRoom.addEventListener('click', async () => {
     if(!db) return alert("Firebase belum dikonfigurasi! Harap buka file script.js dan masukkan konfigurasi Anda.");
     
+    if (hostPasswordInput.value !== 'kesbangumkt2026') {
+        return lobbyMessage.innerText = "Password Host salah!";
+    }
+
     const selectedSet = document.getElementById('question-set-select').value;
     const roomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
     
@@ -310,23 +327,28 @@ btnJoinRoom.addEventListener('click', async () => {
     listenToRoomAsPlayer(roomCode);
 });
 
+if (btnStartGame) {
+    btnStartGame.addEventListener('click', async () => {
+        if (myRole !== 'host') return;
+        const snapshot = await get(ref(db, 'rooms/' + myRoom));
+        const data = snapshot.val();
+        if (data && data.players && data.players.A && data.players.B && data.state.status === 'waiting') {
+            hostControls.style.display = 'none';
+            startGameAsHost(myRoom, data);
+        }
+    });
+}
+
 // ==========================================
 // 6. HOST LOGIC (Bertindak sebagai Server)
 // ==========================================
 function listenToRoomAsHost(roomCode) {
     const roomRef = ref(db, 'rooms/' + roomCode);
-    let hasStarted = false;
     let lastActionTimestamp = 0;
 
     onValue(roomRef, (snapshot) => {
         const data = snapshot.val();
         if(!data) return;
-
-        // Start Game if both players joined
-        if (!hasStarted && data.players && data.players.A && data.players.B && data.state.status === 'waiting') {
-            hasStarted = true;
-            startGameAsHost(roomCode, data);
-        }
 
         // Host Handles Answers
         if (data.state.status === 'playing' && data.actions) {
@@ -349,9 +371,9 @@ function startGameAsHost(roomCode, data) {
     
     setTimeout(() => {
         update(ref(db, `rooms/${roomCode}/state`), { 
-            status: 'playing',
+            status: 'reading',
             questionStartTime: Date.now(),
-            timeLeft: 20
+            timeLeft: 5
         });
         startHostTimer(roomCode);
     }, 4000); // 4 detik countdown
@@ -364,13 +386,21 @@ function startHostTimer(roomCode) {
         if(!snap.exists()) return clearInterval(hostTimerInterval);
         
         let state = snap.val();
-        if(state.status !== 'playing') return clearInterval(hostTimerInterval);
+        if(state.status !== 'playing' && state.status !== 'reading') return clearInterval(hostTimerInterval);
 
         let newTime = state.timeLeft - 1;
         
         if (newTime <= 0) {
             clearInterval(hostTimerInterval);
-            handleTimeUpAsHost(roomCode, state);
+            if (state.status === 'reading') {
+                state.status = 'playing';
+                state.timeLeft = 10;
+                state.questionStartTime = Date.now();
+                update(ref(db, `rooms/${roomCode}/state`), state);
+                startHostTimer(roomCode);
+            } else if (state.status === 'playing') {
+                handleTimeUpAsHost(roomCode, state);
+            }
         } else {
             update(ref(db, `rooms/${roomCode}/state`), { timeLeft: newTime });
         }
@@ -384,58 +414,88 @@ async function handlePlayerAnswersAsHost(roomCode, data) {
 
     let actionTrigger = null;
 
-    if (actions.A) {
-        clearInterval(hostTimerInterval); // Stop timer
+    if (actions.A && !state.hasAnsweredA) {
+        state.hasAnsweredA = true;
         const isCorrect = (actions.A.answerIndex === currentQ.ans);
         const timeTaken = Date.now() - state.questionStartTime;
         
         if(isCorrect) {
+            clearInterval(hostTimerInterval); // Stop timer
             state.scoreA += 10; state.ropePos -= 10; state.totalTimeA += timeTaken; state.correctAnswersA++;
+            actionTrigger = { team: 'A', isCorrect, answerIndex: actions.A.answerIndex, correctAnswerIndex: currentQ.ans, reveal: true, timestamp: Date.now() };
+            await update(ref(db, `rooms/${roomCode}/actions`), { A: null }); // Clear action
+            proceedToNextQuestion(roomCode, state, actionTrigger);
+        } else {
+            actionTrigger = { team: 'A', isCorrect, answerIndex: actions.A.answerIndex, correctAnswerIndex: currentQ.ans, reveal: !!state.hasAnsweredB, timestamp: Date.now() };
+            state.actionTrigger = actionTrigger;
+            await update(ref(db, `rooms/${roomCode}/actions`), { A: null });
+            await update(ref(db, `rooms/${roomCode}/state`), state);
+            
+            if (state.hasAnsweredB) {
+                clearInterval(hostTimerInterval);
+                proceedToNextQuestion(roomCode, state, actionTrigger);
+            }
         }
-        actionTrigger = { team: 'A', isCorrect, answerIndex: actions.A.answerIndex, correctAnswerIndex: currentQ.ans, timestamp: Date.now() };
-        
-        await update(ref(db, `rooms/${roomCode}/actions`), { A: null }); // Clear action
-        proceedToNextQuestion(roomCode, state, actionTrigger);
     } 
-    else if (actions.B) {
-        clearInterval(hostTimerInterval);
+    else if (actions.B && !state.hasAnsweredB) {
+        state.hasAnsweredB = true;
         const isCorrect = (actions.B.answerIndex === currentQ.ans);
         const timeTaken = Date.now() - state.questionStartTime;
         
         if(isCorrect) {
+            clearInterval(hostTimerInterval); // Stop timer
             state.scoreB += 10; state.ropePos += 10; state.totalTimeB += timeTaken; state.correctAnswersB++;
+            actionTrigger = { team: 'B', isCorrect, answerIndex: actions.B.answerIndex, correctAnswerIndex: currentQ.ans, reveal: true, timestamp: Date.now() };
+            await update(ref(db, `rooms/${roomCode}/actions`), { B: null }); // Clear action
+            proceedToNextQuestion(roomCode, state, actionTrigger);
+        } else {
+            actionTrigger = { team: 'B', isCorrect, answerIndex: actions.B.answerIndex, correctAnswerIndex: currentQ.ans, reveal: !!state.hasAnsweredA, timestamp: Date.now() };
+            state.actionTrigger = actionTrigger;
+            await update(ref(db, `rooms/${roomCode}/actions`), { B: null });
+            await update(ref(db, `rooms/${roomCode}/state`), state);
+            
+            if (state.hasAnsweredA) {
+                clearInterval(hostTimerInterval);
+                proceedToNextQuestion(roomCode, state, actionTrigger);
+            }
         }
-        actionTrigger = { team: 'B', isCorrect, answerIndex: actions.B.answerIndex, correctAnswerIndex: currentQ.ans, timestamp: Date.now() };
-        
-        await update(ref(db, `rooms/${roomCode}/actions`), { B: null }); // Clear action
-        proceedToNextQuestion(roomCode, state, actionTrigger);
     }
 }
 
 function handleTimeUpAsHost(roomCode, state) {
     const currentQ = state.questions[state.currentQIndex];
-    const actionTrigger = { team: 'none', isCorrect: false, answerIndex: -1, correctAnswerIndex: currentQ.ans, timestamp: Date.now() };
+    const actionTrigger = { team: 'none', isCorrect: false, answerIndex: -1, correctAnswerIndex: currentQ.ans, reveal: true, timestamp: Date.now() };
     proceedToNextQuestion(roomCode, state, actionTrigger);
 }
 
 function proceedToNextQuestion(roomCode, state, actionTrigger) {
     state.currentQIndex++;
     state.actionTrigger = actionTrigger; // Beritahu client soal jawaban
+    state.hasAnsweredA = false;
+    state.hasAnsweredB = false;
     
     if (state.ropePos <= 0 || state.ropePos >= 100 || state.currentQIndex >= MAX_QUESTIONS) {
         state.status = 'ended';
         update(ref(db, `rooms/${roomCode}/state`), state);
     } else {
         state.status = 'transition';
+        state.timeLeft = 5;
         update(ref(db, `rooms/${roomCode}/state`), state);
         
-        setTimeout(() => {
-            state.status = 'playing';
-            state.questionStartTime = Date.now();
-            state.timeLeft = 20;
-            update(ref(db, `rooms/${roomCode}/state`), state);
-            startHostTimer(roomCode);
-        }, 2500); // 2.5 detik jeda antar soal
+        clearInterval(hostTimerInterval);
+        hostTimerInterval = setInterval(() => {
+            state.timeLeft--;
+            if (state.timeLeft <= 0) {
+                clearInterval(hostTimerInterval);
+                state.status = 'reading';
+                state.questionStartTime = Date.now();
+                state.timeLeft = 5;
+                update(ref(db, `rooms/${roomCode}/state`), state);
+                startHostTimer(roomCode);
+            } else {
+                update(ref(db, `rooms/${roomCode}/state`), { timeLeft: state.timeLeft });
+            }
+        }, 1000);
     }
 }
 
@@ -503,6 +563,12 @@ function renderState(data) {
     if (state.status === 'waiting') {
         waitingScreen.style.display = 'flex';
         countdownScreen.style.display = 'none';
+        
+        if (myRole === 'host' && data.players && data.players.A && data.players.B) {
+            if (hostControls) hostControls.style.display = 'block';
+        } else {
+            if (hostControls) hostControls.style.display = 'none';
+        }
     } 
     // Countdown Awal
     else if (state.status === 'countdown') {
@@ -541,15 +607,18 @@ function renderState(data) {
             }, 1000);
         }
     } 
-    // Sedang Bermain
-    else if (state.status === 'playing') {
+    // Sedang Bermain atau Membaca atau Transition
+    else if (['reading', 'playing', 'transition'].includes(state.status)) {
         waitingScreen.style.display = 'none';
         countdownScreen.style.display = 'none';
-        renderQuestion(state);
-    } 
-    // Jeda antar soal
-    else if (state.status === 'transition') {
-        isLocked = true;
+        
+        if (lastRenderedQIndex !== state.currentQIndex || window.lastRenderedStatus !== state.status) {
+            if (state.status !== 'transition' || lastRenderedQIndex !== state.currentQIndex) {
+                renderQuestion(state);
+            }
+        }
+        
+        if (state.status === 'transition' || state.status === 'reading') isLocked = true;
     }
     // Selesai
     else if (state.status === 'ended') {
@@ -562,11 +631,10 @@ let lastRenderedQIndex = -1;
 function renderQuestion(state) {
     if (state.currentQIndex >= MAX_QUESTIONS) return;
     
-    // Hindari render ulang opsi jika soal belum berubah
-    if (lastRenderedQIndex === state.currentQIndex) return;
     lastRenderedQIndex = state.currentQIndex;
+    window.lastRenderedStatus = state.status;
 
-    isLocked = false;
+    isLocked = (state.status === 'reading');
     const currentQ = state.questions[state.currentQIndex];
     
     questionTextEl.innerText = `Soal ${state.currentQIndex + 1}/${MAX_QUESTIONS}:\n${currentQ.q}`;
@@ -581,19 +649,21 @@ function renderQuestion(state) {
     if (myRole === 'host') {
         optionsHostContainer.innerHTML = '';
         currentQ.opts.forEach((opt, idx) => {
+            const optContent = state.status === 'reading' ? '...' : opt;
             optionsHostContainer.innerHTML += `
                 <button class="option disabled-option" id="opt-host-${idx}" disabled="true">
-                    <span class="key-hint hint-b">${hints[idx]}</span><span class="opt-text">${opt}</span>
+                    <span class="key-hint hint-b">${hints[idx]}</span><span class="opt-text">${optContent}</span>
                 </button>`;
         });
     } else {
         optionsAContainer.innerHTML = '';
         optionsBContainer.innerHTML = '';
         currentQ.opts.forEach((opt, idx) => {
+            const optContent = state.status === 'reading' ? '...' : opt;
             const btnHTML = `
                 <button class="option" id="opt-${idx}" onclick="handleMouseClick(${idx})">
                     <span class="key-hint ${myRole==='A' ? 'hint-a' : 'hint-b'}">${hints[idx]}</span>
-                    <span class="opt-text">${opt}</span>
+                    <span class="opt-text">${optContent}</span>
                 </button>`;
             if (myRole === 'A') optionsAContainer.innerHTML += btnHTML;
             if (myRole === 'B') optionsBContainer.innerHTML += btnHTML;
@@ -602,7 +672,7 @@ function renderQuestion(state) {
 }
 
 function renderFeedback(actionTrigger) {
-    const { team, isCorrect, answerIndex, correctAnswerIndex } = actionTrigger;
+    const { team, isCorrect, answerIndex, correctAnswerIndex, reveal } = actionTrigger;
 
     if (team === 'none') {
         // Waktu habis
@@ -619,8 +689,10 @@ function renderFeedback(actionTrigger) {
             if (isCorrect) optEl.classList.add('correct');
             else {
                 optEl.classList.add('wrong');
-                const correctEl = document.getElementById('opt-host-' + correctAnswerIndex);
-                if (correctEl) correctEl.classList.add('correct');
+                if (reveal) {
+                    const correctEl = document.getElementById('opt-host-' + correctAnswerIndex);
+                    if (correctEl) correctEl.classList.add('correct');
+                }
             }
         }
         flashBg(team === 'A' ? bgA : bgB, isCorrect ? 'flash-green' : 'flash-red');
@@ -632,17 +704,31 @@ function renderFeedback(actionTrigger) {
                 if (isCorrect) optEl.classList.add('correct');
                 else {
                     optEl.classList.add('wrong');
-                    const correctEl = document.getElementById('opt-' + correctAnswerIndex);
-                    if (correctEl) correctEl.classList.add('correct');
+                    if (reveal) {
+                        const correctEl = document.getElementById('opt-' + correctAnswerIndex);
+                        if (correctEl) correctEl.classList.add('correct');
+                    }
                 }
             }
             flashBg(myRole === 'A' ? bgA : bgB, isCorrect ? 'flash-green' : 'flash-red');
         } else {
-            // Lawan menjawab duluan (tampilkan jawaban yang benar saja)
-            questionTextEl.innerText = "Lawan Menjawab Duluan!";
-            const correctEl = document.getElementById('opt-' + correctAnswerIndex);
-            if (correctEl) correctEl.classList.add('correct');
-            flashBg(team === 'A' ? bgA : bgB, isCorrect ? 'flash-green' : 'flash-red');
+            // Lawan menjawab
+            if (isCorrect) {
+                questionTextEl.innerText = "Lawan Menjawab Benar!";
+                isLocked = true;
+                const correctEl = document.getElementById('opt-' + correctAnswerIndex);
+                if (correctEl) correctEl.classList.add('correct');
+                flashBg(team === 'A' ? bgA : bgB, 'flash-green');
+            } else {
+                questionTextEl.innerText = "Lawan Menjawab Salah! Kesempatan Anda!";
+                const optEl = document.getElementById('opt-' + answerIndex);
+                if (optEl) optEl.classList.add('wrong');
+                if (reveal) {
+                    const correctEl = document.getElementById('opt-' + correctAnswerIndex);
+                    if (correctEl) correctEl.classList.add('correct');
+                }
+                flashBg(team === 'A' ? bgA : bgB, 'flash-red');
+            }
         }
     }
 }
