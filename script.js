@@ -270,7 +270,11 @@ btnCreateRoom.addEventListener('click', async () => {
     headerArea.style.display = 'flex';
     ropeArea.style.display = 'flex';
     quizArea.style.display = 'flex';
-    boxHost.style.display = 'block';
+    boxHost.style.display = 'none';
+    boxA.style.display = 'block';
+    boxB.style.display = 'block';
+    document.querySelector('.box-a h3').innerText = 'JAWABAN TIM MERAH';
+    document.querySelector('.box-b h3').innerText = 'JAWABAN TIM PUTIH';
 
     listenToRoomAsHost(roomCode);
 });
@@ -321,8 +325,8 @@ btnJoinRoom.addEventListener('click', async () => {
     ropeArea.style.display = 'none'; 
     quizArea.style.display = 'flex'; 
     
-    if (myRole === 'A') { boxA.style.display = 'block'; boxB.style.display = 'none'; }
-    if (myRole === 'B') { boxA.style.display = 'none'; boxB.style.display = 'block'; }
+    if (myRole === 'A') { boxA.style.display = 'block'; boxB.style.display = 'none'; document.querySelector('.box-a h3').innerText = 'PILIHAN JAWABAN ANDA'; }
+    if (myRole === 'B') { boxA.style.display = 'none'; boxB.style.display = 'block'; document.querySelector('.box-b h3').innerText = 'PILIHAN JAWABAN ANDA'; }
 
     listenToRoomAsPlayer(roomCode);
 });
@@ -647,11 +651,16 @@ function renderQuestion(state) {
     const hints = ['A', 'B', 'C', 'D'];
     
     if (myRole === 'host') {
-        optionsHostContainer.innerHTML = '';
+        optionsAContainer.innerHTML = '';
+        optionsBContainer.innerHTML = '';
         currentQ.opts.forEach((opt, idx) => {
             const optContent = state.status === 'reading' ? '...' : opt;
-            optionsHostContainer.innerHTML += `
-                <button class="option disabled-option" id="opt-host-${idx}" disabled="true">
+            optionsAContainer.innerHTML += `
+                <button class="option disabled-option" id="opt-host-a-${idx}" disabled="true">
+                    <span class="key-hint hint-a">${hints[idx]}</span><span class="opt-text">${optContent}</span>
+                </button>`;
+            optionsBContainer.innerHTML += `
+                <button class="option disabled-option" id="opt-host-b-${idx}" disabled="true">
                     <span class="key-hint hint-b">${hints[idx]}</span><span class="opt-text">${optContent}</span>
                 </button>`;
         });
@@ -677,21 +686,31 @@ function renderFeedback(actionTrigger) {
     if (team === 'none') {
         // Waktu habis
         questionTextEl.innerText = "WAKTU HABIS! Soal Dilewati...";
-        const correctEl = document.getElementById(myRole === 'host' ? `opt-host-${correctAnswerIndex}` : `opt-${correctAnswerIndex}`);
-        if (correctEl) correctEl.classList.add('correct');
+        if (myRole === 'host') {
+            const correctElA = document.getElementById(`opt-host-a-${correctAnswerIndex}`);
+            const correctElB = document.getElementById(`opt-host-b-${correctAnswerIndex}`);
+            if (correctElA) correctElA.classList.add('correct');
+            if (correctElB) correctElB.classList.add('correct');
+        } else {
+            const correctEl = document.getElementById(`opt-${correctAnswerIndex}`);
+            if (correctEl) correctEl.classList.add('correct');
+        }
         return;
     }
 
     // Ada yang menjawab
     if (myRole === 'host') {
-        const optEl = document.getElementById('opt-host-' + answerIndex);
+        const optEl = document.getElementById(`opt-host-${team.toLowerCase()}-${answerIndex}`);
         if (optEl) {
+            optEl.classList.add(team === 'A' ? 'selected-a' : 'selected-b');
             if (isCorrect) optEl.classList.add('correct');
             else {
                 optEl.classList.add('wrong');
                 if (reveal) {
-                    const correctEl = document.getElementById('opt-host-' + correctAnswerIndex);
-                    if (correctEl) correctEl.classList.add('correct');
+                    const correctElA = document.getElementById(`opt-host-a-${correctAnswerIndex}`);
+                    const correctElB = document.getElementById(`opt-host-b-${correctAnswerIndex}`);
+                    if (correctElA) correctElA.classList.add('correct');
+                    if (correctElB) correctElB.classList.add('correct');
                 }
             }
         }
