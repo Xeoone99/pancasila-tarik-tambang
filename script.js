@@ -473,12 +473,11 @@ function handleTimeUpAsHost(roomCode, state) {
 }
 
 function proceedToNextQuestion(roomCode, state, actionTrigger) {
-    state.currentQIndex++;
     state.actionTrigger = actionTrigger; // Beritahu client soal jawaban
     state.hasAnsweredA = false;
     state.hasAnsweredB = false;
     
-    if (state.ropePos <= 0 || state.ropePos >= 100 || state.currentQIndex >= MAX_QUESTIONS) {
+    if (state.ropePos <= 0 || state.ropePos >= 100 || state.currentQIndex + 1 >= MAX_QUESTIONS) {
         state.status = 'ended';
         update(ref(db, `rooms/${roomCode}/state`), state);
     } else {
@@ -491,6 +490,7 @@ function proceedToNextQuestion(roomCode, state, actionTrigger) {
             state.timeLeft--;
             if (state.timeLeft <= 0) {
                 clearInterval(hostTimerInterval);
+                state.currentQIndex++; // Pindah soal baru setelah jeda 5 detik selesai
                 state.status = 'reading';
                 state.questionStartTime = Date.now();
                 state.timeLeft = 5;
