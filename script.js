@@ -838,6 +838,208 @@ const questionsPool = {
             ],
             ans: 1 // (Jawaban B: 1)
         }
+    ],
+    setE: [
+        {
+            q: "Tokoh yang dikenal sebagai pemimpin Perang Diponegoro adalah ...",
+            opts: [
+                "Pangeran Diponegoro",
+                "Sultan Hasanuddin",
+                "Pattimura",
+                "Tuanku Imam Bonjol"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Pahlawan yang memimpin perlawanan rakyat Surabaya dan terkenal dengan pidato membakar semangat pada 10 November 1945 adalah ...",
+            opts: [
+                "Jenderal Sudirman",
+                "Bung Tomo",
+                "Mohammad Hatta",
+                "Ki Hajar Dewantara"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Jenderal Sudirman dikenal dalam perjuangan mempertahankan kemerdekaan melalui strategi ...",
+            opts: [
+                "Politik etis",
+                "Perang gerilya",
+                "Perang laut",
+                "Diplomasi dagang"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Kapitan Pattimura merupakan pahlawan yang berasal dari daerah ...",
+            opts: [
+                "Aceh",
+                "Maluku",
+                "Bali",
+                "Kalimantan Timur"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Sultan Hasanuddin mendapat julukan dari Belanda sebagai ...",
+            opts: [
+                "Ayam Jantan dari Timur",
+                "Macan dari Selatan",
+                "Elang dari Barat",
+                "Harimau Sumatra"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Pahlawan wanita dari Aceh yang berjuang melawan penjajahan Belanda adalah ...",
+            opts: [
+                "R.A. Kartini",
+                "Dewi Sartika",
+                "Cut Nyak Dien",
+                "Martha Christina Tiahahu"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "R.A. Kartini dikenal sebagai pelopor ...",
+            opts: [
+                "Pendidikan dan kemajuan perempuan",
+                "Perjuangan angkatan laut",
+                "Pembangunan jalan raya",
+                "Pertanian modern"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Dewi Sartika mendirikan sekolah bagi kaum perempuan yang dikenal dengan nama ...",
+            opts: [
+                "Taman Siswa",
+                "Sekolah Isteri",
+                "Sekolah Rakyat",
+                "Perguruan Nasional"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Pahlawan wanita muda dari Maluku yang turut melawan Belanda adalah ...",
+            opts: [
+                "Martha Christina Tiahahu",
+                "Maria Walanda Maramis",
+                "Nyi Ageng Serang",
+                "Opu Daeng Risaju"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Tokoh wanita yang menjahit Bendera Pusaka Merah Putih menjelang Proklamasi Kemerdekaan adalah ...",
+            opts: [
+                "R.A. Kartini",
+                "Fatmawati",
+                "Cut Meutia",
+                "Dewi Sartika"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Presiden pertama Republik Indonesia adalah ...",
+            opts: [
+                "Mohammad Hatta",
+                "Soekarno",
+                "Sutan Sjahrir",
+                "Soeharto"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Soekarno dan Mohammad Hatta membacakan teks Proklamasi Kemerdekaan pada tanggal ...",
+            opts: [
+                "1 Juni 1945",
+                "17 Agustus 1945",
+                "18 Agustus 1945",
+                "10 November 1945"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Tokoh yang mengibarkan Bendera Pusaka Merah Putih pada saat Proklamasi Kemerdekaan 17 Agustus 1945 adalah ...",
+            opts: [
+                "Soekarno dan Mohammad Hatta",
+                "Latief Hendraningrat dan Suhud",
+                "Bung Tomo dan Jenderal Sudirman",
+                "Ahmad Soebardjo dan Sutan Sjahrir"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Gambar pahlawan pada uang kertas Rp100.000 Tahun Emisi 2022 adalah ...",
+            opts: [
+                "Soekarno dan Mohammad Hatta",
+                "Jenderal Sudirman dan Bung Tomo",
+                "Ki Hajar Dewantara dan R.A. Kartini",
+                "Pattimura dan Sultan Hasanuddin"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Pahlawan Ir. H. Djuanda Kartawidjaja terdapat pada uang kertas pecahan ...",
+            opts: [
+                "Rp20.000",
+                "Rp50.000",
+                "Rp10.000",
+                "Rp5.000"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Gambar pahlawan pada uang kertas Rp20.000 Tahun Emisi 2022 adalah ...",
+            opts: [
+                "Frans Kaisiepo",
+                "Dr. G.S.S.J. Ratulangi",
+                "Oto Iskandar di Nata",
+                "Mohammad Hoesni Thamrin"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Frans Kaisiepo terdapat pada uang kertas Rupiah pecahan ...",
+            opts: [
+                "Rp10.000",
+                "Rp5.000",
+                "Rp2.000",
+                "Rp1.000"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "K.H. Idham Chalid terdapat pada uang kertas Rupiah pecahan ...",
+            opts: [
+                "Rp50.000",
+                "Rp20.000",
+                "Rp10.000",
+                "Rp5.000"
+            ],
+            ans: 3 // (Jawaban D: 3)
+        },
+        {
+            q: "Mohammad Hoesni Thamrin terdapat pada uang kertas Rupiah pecahan ...",
+            opts: [
+                "Rp1.000",
+                "Rp2.000",
+                "Rp5.000",
+                "Rp10.000"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Pahlawan wanita Tjut Meutia terdapat pada uang kertas Rupiah pecahan ...",
+            opts: [
+                "Rp1.000",
+                "Rp2.000",
+                "Rp20.000",
+                "Rp50.000"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        }
     ]
 };
 
@@ -848,7 +1050,7 @@ function generateQuestions(selectedSet) {
     if (questionsPool[selectedSet]) {
         pool = questionsPool[selectedSet];
     } else if (selectedSet === 'random') {
-        const sets = ['setA', 'setB', 'setC', 'setD'];
+        const sets = ['setA', 'setB', 'setC', 'setD', 'setE'];
         const randomSet = sets[Math.floor(Math.random() * sets.length)];
         pool = questionsPool[randomSet];
     }
