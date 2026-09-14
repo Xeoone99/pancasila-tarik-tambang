@@ -13,6 +13,10 @@
         <button id="btn-settings" class="btn-settings" title="Riwayat Pertandingan">
             ⚙️
         </button>
+        <!-- Tombol Suara (Mute/Unmute) -->
+        <button id="btn-mute" class="btn-settings" style="right: 90px;" title="Matikan/Nyalakan Suara">
+            🔊
+        </button>
 
         <h1 class="start-title efek-melayang">KUIS ADU CEPAT<br><span style="color:#ffd700;">TARIK TAMBANG PANCASILA</span></h1>
         
@@ -162,6 +166,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Audio Elements -->
+    <audio id="bgm-audio" src="bgm.mp3" loop></audio>
+    <audio id="sfx-correct" src="benar.mp3"></audio>
+    <audio id="sfx-wrong" src="salah.mp3"></audio>
 
     <!-- Script Game (Berbasis Firebase) -->
     <script type="module" src="script.js"></script>

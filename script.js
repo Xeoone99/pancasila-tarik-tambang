@@ -1319,6 +1319,23 @@ const historyModal = document.getElementById('history-modal');
 const closeHistory = document.getElementById('close-history');
 const historyList = document.getElementById('history-list');
 
+// Audio Elements
+const bgmAudio = document.getElementById('bgm-audio');
+const sfxCorrect = document.getElementById('sfx-correct');
+const sfxWrong = document.getElementById('sfx-wrong');
+const btnMute = document.getElementById('btn-mute');
+
+let isMuted = false;
+if(btnMute) {
+    btnMute.addEventListener('click', () => {
+        isMuted = !isMuted;
+        if(bgmAudio) bgmAudio.muted = isMuted;
+        if(sfxCorrect) sfxCorrect.muted = isMuted;
+        if(sfxWrong) sfxWrong.muted = isMuted;
+        btnMute.innerHTML = isMuted ? '🔇' : '🔊';
+    });
+}
+
 // Client State
 let myRoom = '';
 let myRole = ''; // 'host', 'A', or 'B'
@@ -1431,6 +1448,7 @@ btnCreateRoom.addEventListener('click', async () => {
     document.querySelector('.box-b h3').innerText = 'JAWABAN TIM PUTIH';
 
     listenToRoomAsHost(roomCode);
+    if(bgmAudio) bgmAudio.play().catch(e => console.log("BGM Error:", e));
 });
 
 btnJoinRoom.addEventListener('click', async () => {
@@ -1483,6 +1501,7 @@ btnJoinRoom.addEventListener('click', async () => {
     if (myRole === 'B') { boxA.style.display = 'none'; boxB.style.display = 'block'; document.querySelector('.box-b h3').innerText = 'PILIHAN JAWABAN ANDA'; }
 
     listenToRoomAsPlayer(roomCode);
+    if(bgmAudio) bgmAudio.play().catch(e => console.log("BGM Error:", e));
 });
 
 if (btnStartGame) {
@@ -1840,6 +1859,16 @@ function renderFeedback(actionTrigger, state) {
     let originalQ = "";
     if (state && state.questions && state.questions[state.currentQIndex]) {
         originalQ = `Soal ${state.currentQIndex + 1}/${MAX_QUESTIONS}:\n${state.questions[state.currentQIndex].q}\n\n`;
+    }
+
+    if (team !== 'none' && !isMuted) {
+        if (isCorrect && sfxCorrect) {
+            sfxCorrect.currentTime = 0;
+            sfxCorrect.play().catch(e => console.log(e));
+        } else if (!isCorrect && sfxWrong) {
+            sfxWrong.currentTime = 0;
+            sfxWrong.play().catch(e => console.log(e));
+        }
     }
 
     if (team === 'none') {
