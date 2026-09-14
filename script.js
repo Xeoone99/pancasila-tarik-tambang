@@ -1040,6 +1040,208 @@ const questionsPool = {
             ],
             ans: 0 // (Jawaban A: 0)
         }
+    ],
+    setG: [
+        {
+            q: "Ibu kota Provinsi Kalimantan Timur adalah ...",
+            opts: [
+                "Balikpapan",
+                "Samarinda",
+                "Bontang",
+                "Tenggarong"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Jumlah kabupaten dan kota di Provinsi Kalimantan Timur adalah ...",
+            opts: [
+                "7 kabupaten dan 3 kota",
+                "6 kabupaten dan 4 kota",
+                "8 kabupaten dan 2 kota",
+                "9 kabupaten dan 1 kota"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Kabupaten yang beribu kota di Tanjung Redeb adalah ...",
+            opts: [
+                "Kabupaten Paser",
+                "Kabupaten Berau",
+                "Kabupaten Kutai Barat",
+                "Kabupaten Penajam Paser Utara"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Ibu kota Kabupaten Kutai Kartanegara adalah ...",
+            opts: [
+                "Sangatta",
+                "Sendawar",
+                "Tenggarong",
+                "Tanah Grogot"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Sangatta merupakan ibu kota Kabupaten ...",
+            opts: [
+                "Kutai Timur",
+                "Kutai Barat",
+                "Berau",
+                "Paser"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Kabupaten termuda di Kalimantan Timur yang beribu kota di Ujoh Bilang adalah ...",
+            opts: [
+                "Mahakam Ulu",
+                "Kutai Kartanegara",
+                "Penajam Paser Utara",
+                "Berau"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Kota di Kalimantan Timur yang terkenal sebagai Kota Minyak adalah ...",
+            opts: [
+                "Samarinda",
+                "Bontang",
+                "Balikpapan",
+                "Tenggarong"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Kabupaten Penajam Paser Utara beribu kota di ...",
+            opts: [
+                "Penajam",
+                "Tanah Grogot",
+                "Sendawar",
+                "Sangatta"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Kepulauan Derawan, yang terkenal dengan wisata baharinya, berada di Kabupaten ...",
+            opts: [
+                "Berau",
+                "Paser",
+                "Kutai Barat",
+                "Mahakam Ulu"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Danau Labuan Cermin berada di kawasan Biduk-Biduk, Kabupaten ...",
+            opts: [
+                "Kutai Timur",
+                "Berau",
+                "Kutai Kartanegara",
+                "Paser"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Museum Mulawarman yang merupakan bekas keraton Kesultanan Kutai terletak di ...",
+            opts: [
+                "Tenggarong",
+                "Bontang",
+                "Samarinda",
+                "Balikpapan"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Wisata susur Sungai Mahakam paling erat dikaitkan dengan Kota ...",
+            opts: [
+                "Bontang",
+                "Balikpapan",
+                "Samarinda",
+                "Penajam"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Pulau Kakaban di Kabupaten Berau terkenal karena memiliki ...",
+            opts: [
+                "Danau ubur-ubur",
+                "Kawah gunung api",
+                "Perkebunan teh",
+                "Air terjun bertingkat"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Desa Budaya Pampang, tempat wisata budaya masyarakat Dayak, berada di Kota ...",
+            opts: [
+                "Samarinda",
+                "Balikpapan",
+                "Bontang",
+                "Tenggarong"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Salah satu sektor yang memberikan kontribusi sangat besar terhadap perekonomian Kalimantan Timur adalah ...",
+            opts: [
+                "Pertambangan dan penggalian",
+                "Industri tekstil",
+                "Perkebunan teh",
+                "Perikanan air dingin"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Komoditas tambang yang sangat menonjol di Kalimantan Timur adalah ...",
+            opts: [
+                "Timah",
+                "Batubara",
+                "Bauksit",
+                "Emas putih"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Selain pertambangan, komoditas perkebunan yang banyak dikembangkan di Kalimantan Timur adalah ...",
+            opts: [
+                "Kelapa sawit",
+                "Teh",
+                "Apel",
+                "Stroberi"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Makanan ringan khas Samarinda yang dibuat dari ikan dan tepung lalu digoreng adalah ...",
+            opts: [
+                "Amplang",
+                "Gudeg",
+                "Pempek",
+                "Bika ambon"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Ayam cincane khas Samarinda memiliki ciri utama berupa ...",
+            opts: [
+                "Bumbu merah yang gurih",
+                "Kuah santan putih",
+                "Saus keju",
+                "Balutan gula cair"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Makanan khas Samarinda berupa kue berlapis dari tepung beras, santan, dan pisang disebut ...",
+            opts: [
+                "Bubur peca",
+                "Amparan tatak",
+                "Lemper",
+                "Serabi"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        }
     ]
 };
 
@@ -1050,7 +1252,7 @@ function generateQuestions(selectedSet) {
     if (questionsPool[selectedSet]) {
         pool = questionsPool[selectedSet];
     } else if (selectedSet === 'random') {
-        const sets = ['setA', 'setB', 'setC', 'setD', 'setE'];
+        const sets = ['setA', 'setB', 'setC', 'setD', 'setE', 'setG'];
         const randomSet = sets[Math.floor(Math.random() * sets.length)];
         pool = questionsPool[randomSet];
     }
