@@ -1538,7 +1538,7 @@ function listenToRoomAsHost(roomCode) {
         // Tampilkan feedback jawaban di Host (Projector)
         if (data.state.actionTrigger && data.state.actionTrigger.timestamp > lastActionTimestamp) {
             lastActionTimestamp = data.state.actionTrigger.timestamp;
-            renderFeedback(data.state.actionTrigger);
+            renderFeedback(data.state.actionTrigger, data.state);
         }
     });
 }
@@ -1692,7 +1692,7 @@ function listenToRoomAsPlayer(roomCode) {
         // Handle feedback jawaban dari Host (menggunakan actionTrigger)
         if (data.state.actionTrigger && data.state.actionTrigger.timestamp > lastActionTimestamp) {
             lastActionTimestamp = data.state.actionTrigger.timestamp;
-            renderFeedback(data.state.actionTrigger);
+            renderFeedback(data.state.actionTrigger, data.state);
         }
     });
 }
