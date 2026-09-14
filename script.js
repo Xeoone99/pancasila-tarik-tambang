@@ -1242,6 +1242,208 @@ const questionsPool = {
             ],
             ans: 1 // (Jawaban B: 1)
         }
+    ],
+    setH: [
+        {
+            q: "Buah yang kulitnya berduri tajam dan memiliki aroma yang sangat khas adalah ...",
+            opts: [
+                "Durian",
+                "Pisang",
+                "Mangga",
+                "Apel"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah berwarna kuning yang sering kali menjadi makanan favorit monyet adalah ...",
+            opts: [
+                "Jeruk",
+                "Pisang",
+                "Semangka",
+                "Nanas"
+            ],
+            ans: 1
+        },
+        {
+            q: "Buah berwarna merah berukuran kecil yang memiliki biji di bagian luar kulitnya adalah ...",
+            opts: [
+                "Anggur",
+                "Salak",
+                "Stroberi",
+                "Melon"
+            ],
+            ans: 2
+        },
+        {
+            q: "Buah yang memiliki daging berwarna oranye dan banyak biji hitam kecil di bagian tengahnya adalah ...",
+            opts: [
+                "Pepaya",
+                "Jambu biji",
+                "Belimbing",
+                "Sirsak"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah apel umumnya memiliki variasi warna kulit berupa ...",
+            opts: [
+                "Hitam dan biru",
+                "Merah atau hijau",
+                "Ungu dan abu-abu",
+                "Cokelat dan oranye"
+            ],
+            ans: 1
+        },
+        {
+            q: "Buah yang jika dipotong secara melintang bentuknya menyerupai bintang adalah ...",
+            opts: [
+                "Jeruk",
+                "Apel",
+                "Belimbing",
+                "Mangga"
+            ],
+            ans: 2
+        },
+        {
+            q: "Buah naga yang umum dijumpai memiliki warna kulit luar ...",
+            opts: [
+                "Merah jambu / Pink",
+                "Biru tua",
+                "Kuning emas",
+                "Cokelat gelap"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah semangka memiliki daging buah yang umumnya berwarna ...",
+            opts: [
+                "Merah atau kuning",
+                "Biru atau ungu",
+                "Hitam",
+                "Cokelat"
+            ],
+            ans: 0
+        },
+        {
+            q: "Kulit buah salak memiliki tekstur yang mirip dengan ...",
+            opts: [
+                "Bulu kucing",
+                "Sisik ular",
+                "Kulit jeruk",
+                "Kayu keras"
+            ],
+            ans: 1
+        },
+        {
+            q: "Buah mangga yang sudah matang sempurna memiliki daging buah berwarna ...",
+            opts: [
+                "Hijau muda",
+                "Kuning atau oranye",
+                "Biru",
+                "Putih transparan"
+            ],
+            ans: 1
+        },
+        {
+            q: "Bagian dari buah kelapa muda yang paling sering dimanfaatkan untuk diminum segar adalah ...",
+            opts: [
+                "Air kelapa",
+                "Akar kelapa",
+                "Batang kelapa",
+                "Daun kelapa"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah alpukat memiliki tekstur daging yang khas, yaitu ...",
+            opts: [
+                "Keras dan renyah",
+                "Lembut dan berminyak/creamy",
+                "Berair dan berserat",
+                "Kering dan tepung"
+            ],
+            ans: 1
+        },
+        {
+            q: "Buah rambutan dinamakan demikian karena pada bagian kulitnya terdapat ...",
+            opts: [
+                "Duri tajam",
+                "Rambut-rambut halus",
+                "Bintik hitam",
+                "Lapisan lilin"
+            ],
+            ans: 1
+        },
+        {
+            q: "Buah manggis saat sudah matang memiliki kulit berwarna ...",
+            opts: [
+                "Ungu gelap atau kehitaman",
+                "Merah cerah",
+                "Kuning terang",
+                "Hijau tua"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah sawo memiliki daging buah yang berwarna ... dengan rasa yang manis legit.",
+            opts: [
+                "Cokelat",
+                "Hijau",
+                "Biru",
+                "Merah menyala"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah nanas memiliki hiasan berupa mahkota daun yang terletak di bagian ...",
+            opts: [
+                "Bawah buah",
+                "Puncak/atas buah",
+                "Tengah-tengah buah",
+                "Akar buah"
+            ],
+            ans: 1
+        },
+        {
+            q: "Buah sirsak memiliki daging buah berwarna ... dengan sensasi rasa manis bercampur asam.",
+            opts: [
+                "Putih",
+                "Biru",
+                "Hitam",
+                "Ungu"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah jeruk sangat kaya akan kandungan vitamin ...",
+            opts: [
+                "Vitamin C",
+                "Vitamin D",
+                "Vitamin K",
+                "Vitamin E"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah pisang berkembang biak secara alami menggunakan ...",
+            opts: [
+                "Tunas",
+                "Spora",
+                "Biji keras",
+                "Umbi batang"
+            ],
+            ans: 0
+        },
+        {
+            q: "Buah melon dan semangka merupakan jenis buah yang banyak mengandung ...",
+            opts: [
+                "Air",
+                "Minyak",
+                "Alkohol",
+                "Garam"
+            ],
+            ans: 0
+        }
     ]
 };
 
@@ -1252,7 +1454,7 @@ function generateQuestions(selectedSet) {
     if (questionsPool[selectedSet]) {
         pool = questionsPool[selectedSet];
     } else if (selectedSet === 'random') {
-        const sets = ['setA', 'setB', 'setC', 'setD', 'setE', 'setG'];
+        const sets = ['setA', 'setB', 'setC', 'setD', 'setE', 'setG', 'setH'];
         const randomSet = sets[Math.floor(Math.random() * sets.length)];
         pool = questionsPool[randomSet];
     }
