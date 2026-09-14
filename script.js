@@ -32,26 +32,206 @@ if (firebaseConfig.apiKey) {
 // ==========================================
 const questionsPool = {
     setA: [
-        { q: "Pancasila bagi bangsa Indonesia berkedudukan sebagai ....", opts: ["dasar negara dan pandangan hidup bangsa", "peraturan pemerintah", "hukum daerah", "semboyan negara"], ans: 0 },
-        { q: "Sikap yang sesuai dengan sila pertama Pancasila di lingkungan sekolah adalah ....", opts: ["memaksakan agama kepada teman", "menghormati teman yang sedang menjalankan ibadah", "memilih teman berdasarkan agama", "melarang teman menjalankan ibadah"], ans: 1 },
-        { q: "Ketika terjadi perbedaan pendapat dalam kelompok, sikap yang sesuai dengan nilai Pancasila adalah ....", opts: ["memaksakan pendapat sendiri", "meninggalkan kelompok", "bermusyawarah untuk mencapai mufakat", "menyerahkan keputusan kepada satu orang"], ans: 2 },
-        { q: "Semboyan Bhinneka Tunggal Ika memiliki arti ....", opts: ["bersatu kita teguh", "berbeda-beda tetapi tetap satu", "satu bangsa satu budaya", "bersama membangun negara"], ans: 1 },
-        { q: "Indonesia memiliki banyak suku, agama, bahasa, dan budaya. Sikap yang tepat terhadap keberagaman tersebut adalah ....", opts: ["menganggap budaya sendiri paling unggul", "menghindari orang yang berbeda suku", "menghargai dan menghormati perbedaan", "memaksakan budaya sendiri kepada orang lain"], ans: 2 },
-        { q: "Contoh perilaku yang dapat memperkuat persatuan di sekolah adalah ....", opts: ["membentuk kelompok berdasarkan suku", "memilih teman berdasarkan status sosial", "bekerja sama dalam kegiatan gotong royong", "mengejek budaya daerah lain"], ans: 2 },
-        { q: "Negara Indonesia berbentuk ....", opts: ["kerajaan", "republik", "federasi", "monarki"], ans: 1 },
-        { q: "Salah satu bentuk bela negara yang dapat dilakukan oleh pelajar adalah ....", opts: ["mengikuti tawuran", "menaati tata tertib dan belajar dengan sungguh-sungguh", "menyebarkan berita bohong", "merusak fasilitas umum"], ans: 1 },
-        { q: "Menjaga keutuhan Negara Kesatuan Republik Indonesia merupakan tanggung jawab ....", opts: ["TNI saja", "pemerintah saja", "aparat keamanan saja", "seluruh warga negara"], ans: 3 },
-        { q: "Perilaku yang menunjukkan rasa cinta tanah air adalah ....", opts: ["merusak fasilitas umum", "menghargai budaya dan produk dalam negeri", "merendahkan budaya daerah sendiri", "tidak peduli terhadap lingkungan"], ans: 1 },
-        { q: "UUD Negara Republik Indonesia Tahun 1945 memiliki kedudukan sebagai ....", opts: ["hukum dasar negara", "peraturan sekolah", "hukum adat", "peraturan daerah"], ans: 0 },
-        { q: "Contoh kewajiban seorang pelajar sebagai bagian dari warga negara adalah ....", opts: ["mendapatkan pendidikan", "mendapatkan perlindungan", "menaati peraturan yang berlaku", "memperoleh penghargaan"], ans: 2 },
-        { q: "Seorang siswa menemukan informasi yang belum jelas kebenarannya di media sosial. Sikap yang tepat adalah ....", opts: ["langsung menyebarkannya", "menambahkan komentar provokatif", "memeriksa kebenarannya terlebih dahulu", "mengirimkannya ke semua grup"], ans: 2 },
-        { q: "Berita palsu yang sengaja dibuat dan disebarkan untuk menyesatkan masyarakat disebut ....", opts: ["fakta", "opini", "hoaks", "aspirasi"], ans: 2 },
-        { q: "Gotong royong merupakan salah satu sikap yang penting dalam kehidupan berbangsa karena ....", opts: ["menumbuhkan kerja sama dan persatuan", "membuat seseorang menjadi lebih berkuasa", "menghilangkan keberagaman", "mengutamakan kepentingan pribadi"], ans: 0 },
-        { q: "Jika ada teman yang berbeda suku atau budaya diejek oleh teman lainnya, tindakan yang paling tepat adalah ....", opts: ["ikut mengejek", "membiarkannya", "menegur dan mengajak menghargai perbedaan", "membalas dengan mengejek suku pelaku"], ans: 2 },
-        { q: "Dalam kehidupan demokratis, perbedaan pendapat sebaiknya diselesaikan melalui ....", opts: ["kekerasan", "musyawarah", "ancaman", "pemaksaan"], ans: 1 },
-        { q: "Salah satu bentuk penggunaan kemerdekaan berpendapat yang bertanggung jawab adalah ....", opts: ["menyampaikan pendapat dengan sopan dan berdasarkan fakta", "menghina orang yang berbeda pendapat", "menyebarkan fitnah", "memaksakan pendapat kepada orang lain"], ans: 0 },
-        { q: "Wawasan Nusantara mengajarkan bahwa wilayah Indonesia harus dipandang sebagai ....", opts: ["wilayah yang terpisah-pisah", "satu kesatuan wilayah dan bangsa", "kumpulan daerah yang berdiri sendiri", "wilayah yang hanya terdiri dari pulau-pulau besar"], ans: 1 },
-        { q: "Perhatikan tindakan berikut: 1. Menghormati perbedaan agama. 2. Melaksanakan gotong royong. 3. Menyebarkan ujaran kebencian. 4. Menjaga fasilitas umum. Perilaku yang mencerminkan wawasan kebangsaan ditunjukkan oleh nomor ....", opts: ["1, 2, dan 4", "1, 3, dan 4", "2 dan 3", "3 dan 4"], ans: 0 }
+        {
+            q: "Pancasila bagi bangsa Indonesia berkedudukan sebagai ....",
+            opts: [
+                "dasar negara dan pandangan hidup bangsa",
+                "peraturan pemerintah",
+                "hukum daerah",
+                "semboyan negara"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Sikap yang sesuai dengan sila pertama Pancasila di lingkungan sekolah adalah ....",
+            opts: [
+                "memaksakan agama kepada teman",
+                "menghormati teman yang sedang menjalankan ibadah",
+                "memilih teman berdasarkan agama",
+                "melarang teman menjalankan ibadah"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Ketika terjadi perbedaan pendapat dalam kelompok, sikap yang sesuai dengan nilai Pancasila adalah ....",
+            opts: [
+                "memaksakan pendapat sendiri",
+                "meninggalkan kelompok",
+                "bermusyawarah untuk mencapai mufakat",
+                "menyerahkan keputusan kepada satu orang"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Semboyan Bhinneka Tunggal Ika memiliki arti ....",
+            opts: [
+                "bersatu kita teguh",
+                "berbeda-beda tetapi tetap satu",
+                "satu bangsa satu budaya",
+                "bersama membangun negara"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Indonesia memiliki banyak suku, agama, bahasa, dan budaya. Sikap yang tepat terhadap keberagaman tersebut adalah ....",
+            opts: [
+                "menganggap budaya sendiri paling unggul",
+                "menghindari orang yang berbeda suku",
+                "menghargai dan menghormati perbedaan",
+                "memaksakan budaya sendiri kepada orang lain"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Contoh perilaku yang dapat memperkuat persatuan di sekolah adalah ....",
+            opts: [
+                "membentuk kelompok berdasarkan suku",
+                "memilih teman berdasarkan status sosial",
+                "bekerja sama dalam kegiatan gotong royong",
+                "mengejek budaya daerah lain"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Negara Indonesia berbentuk ....",
+            opts: [
+                "kerajaan",
+                "republik",
+                "federasi",
+                "monarki"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Salah satu bentuk bela negara yang dapat dilakukan oleh pelajar adalah ....",
+            opts: [
+                "mengikuti tawuran",
+                "menaati tata tertib dan belajar dengan sungguh-sungguh",
+                "menyebarkan berita bohong",
+                "merusak fasilitas umum"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Menjaga keutuhan Negara Kesatuan Republik Indonesia merupakan tanggung jawab ....",
+            opts: [
+                "TNI saja",
+                "pemerintah saja",
+                "aparat keamanan saja",
+                "seluruh warga negara"
+            ],
+            ans: 3 // (Indeks pilihan D: 3)
+        },
+        {
+            q: "Perilaku yang menunjukkan rasa cinta tanah air adalah ....",
+            opts: [
+                "merusak fasilitas umum",
+                "menghargai budaya dan produk dalam negeri",
+                "merendahkan budaya daerah sendiri",
+                "tidak peduli terhadap lingkungan"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "UUD Negara Republik Indonesia Tahun 1945 memiliki kedudukan sebagai ....",
+            opts: [
+                "hukum dasar negara",
+                "peraturan sekolah",
+                "hukum adat",
+                "peraturan daerah"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Contoh kewajiban seorang pelajar sebagai bagian dari warga negara adalah ....",
+            opts: [
+                "mendapatkan pendidikan",
+                "mendapatkan perlindungan",
+                "menaati peraturan yang berlaku",
+                "memperoleh penghargaan"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Seorang siswa menemukan informasi yang belum jelas kebenarannya di media sosial. Sikap yang tepat adalah ....",
+            opts: [
+                "langsung menyebarkannya",
+                "menambahkan komentar provokatif",
+                "memeriksa kebenarannya terlebih dahulu",
+                "mengirimkannya ke semua grup"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Berita palsu yang sengaja dibuat dan disebarkan untuk menyesatkan masyarakat disebut ....",
+            opts: [
+                "fakta",
+                "opini",
+                "hoaks",
+                "aspirasi"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Gotong royong merupakan salah satu sikap yang penting dalam kehidupan berbangsa karena ....",
+            opts: [
+                "menumbuhkan kerja sama dan persatuan",
+                "membuat seseorang menjadi lebih berkuasa",
+                "menghilangkan keberagaman",
+                "mengutamakan kepentingan pribadi"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Jika ada teman yang berbeda suku atau budaya diejek oleh teman lainnya, tindakan yang paling tepat adalah ....",
+            opts: [
+                "ikut mengejek",
+                "membiarkannya",
+                "menegur dan mengajak menghargai perbedaan",
+                "membalas dengan mengejek suku pelaku"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Dalam kehidupan demokratis, perbedaan pendapat sebaiknya diselesaikan melalui ....",
+            opts: [
+                "kekerasan",
+                "musyawarah",
+                "ancaman",
+                "pemaksaan"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Salah satu bentuk penggunaan kemerdekaan berpendapat yang bertanggung jawab adalah ....",
+            opts: [
+                "menyampaikan pendapat dengan sopan dan berdasarkan fakta",
+                "menghina orang yang berbeda pendapat",
+                "menyebarkan fitnah",
+                "memaksakan pendapat kepada orang lain"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Wawasan Nusantara mengajarkan bahwa wilayah Indonesia harus dipandang sebagai ....",
+            opts: [
+                "wilayah yang terpisah-pisah",
+                "satu kesatuan wilayah dan bangsa",
+                "kumpulan daerah yang berdiri sendiri",
+                "wilayah yang hanya terdiri dari pulau-pulau besar"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Perhatikan tindakan berikut:\n1. Menghormati perbedaan agama.\n2. Melaksanakan gotong royong.\n3. Menyebarkan ujaran kebencian.\n4. Menjaga fasilitas umum.\nPerilaku yang mencerminkan wawasan kebangsaan ditunjukkan oleh nomor ....",
+            opts: [
+                "1, 2, dan 4",
+                "1, 3, dan 4",
+                "2 dan 3",
+                "3 dan 4"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        }
     ],
     setB: [
         { q: "Dasar negara Indonesia adalah...", opts: ["UUD 1945", "Pancasila", "Bhinneka Tunggal Ika", "Tap MPR"], ans: 1 },
