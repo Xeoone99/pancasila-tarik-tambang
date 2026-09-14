@@ -234,40 +234,610 @@ const questionsPool = {
         }
     ],
     setB: [
-        { q: "Dasar negara Indonesia adalah...", opts: ["UUD 1945", "Pancasila", "Bhinneka Tunggal Ika", "Tap MPR"], ans: 1 },
-        { q: "Sila ketiga berbunyi...", opts: ["Persatuan Indonesia", "Keadilan Sosial", "Kemanusiaan yang adil", "Ketuhanan yang Maha Esa"], ans: 0 },
-        { q: "Lambang sila ke-4 adalah...", opts: ["Bintang", "Kepala Banteng", "Rantai", "Padi dan Kapas"], ans: 1 },
-        { q: "Warna latar pada lambang Bintang (Sila ke-1) adalah...", opts: ["Hitam", "Merah", "Putih", "Kuning"], ans: 0 },
-        { q: "Rantai pada sila kedua melambangkan...", opts: ["Pengekangan", "Hubungan manusia yang saling membantu", "Kekuatan militer", "Ikatan ekonomi"], ans: 1 },
-        { q: "Piagam Jakarta dirumuskan pada tanggal...", opts: ["22 Juni 1945", "1 Juni 1945", "18 Agustus 1945", "17 Agustus 1945"], ans: 0 },
-        { q: "Padi pada lambang sila kelima bermakna...", opts: ["Kecukupan pangan", "Kecukupan sandang", "Kekayaan hutan", "Kemakmuran laut"], ans: 0 },
-        { q: "Jumlah bulu pada masing-masing sayap Garuda Pancasila adalah...", opts: ["17", "8", "19", "45"], ans: 0 },
-        { q: "Jumlah bulu pada ekor Garuda Pancasila adalah...", opts: ["8", "17", "19", "45"], ans: 0 },
-        { q: "Garuda Pancasila dirancang oleh...", opts: ["Soekarno", "Sultan Hamid II", "Moh Yamin", "Soepomo"], ans: 1 }
+        {
+            q: "Semboyan Bhinneka Tunggal Ika memiliki makna, walaupun beragam?...",
+            opts: [
+                "Suku bangsa, agama, ras dan antar golongan tetapi tetap satu kesatuan",
+                "Pemikiran tetapi tetap untuk kemajuan Indonesia",
+                "Indonesia negara majemuk, tetapi mampu hidup rukun",
+                "Peraturan tetapi tetap menjunjung hukum nasional"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Dengan adanya Ideologi Pancasila dimaksudkan untuk mendidik masyarakat agar ...",
+            opts: [
+                "Dapat mengemukakan pendapat sesuai dengan suara hati",
+                "Tidak ada pemaksaan terhadap suatu peraturan",
+                "Dapat meningkatkan kesejahteraan masyarakat",
+                "Bertingkah laku sesuai dengan norma yang berlaku"
+            ],
+            ans: 3 // (Indeks pilihan D: 3)
+        },
+        {
+            q: "Tugas utama BPUPKI adalah ....",
+            opts: [
+                "Menyelidiki dan mempersiapkan hal-hal terkait kemerdekaan",
+                "Membentuk tentara nasional",
+                "Merancang Undang-Undang Hukum Pidana",
+                "Melatih rakyat untuk perang"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Ketua BPUPKI adalah ....",
+            opts: [
+                "Mohammad Hatta",
+                "Soepomo",
+                "Dr. Radjiman Wedyodiningrat",
+                "Ahmad Subardjo"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Panitia Sembilan berhasil merumuskan ....",
+            opts: [
+                "Proklamasi Kemerdekaan",
+                "Piagam Jakarta",
+                "Undang-Undang Perang",
+                "Tata Tertib Sidang"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Pancasila ditetapkan sebagai dasar negara pada tanggal ....",
+            opts: [
+                "1 Juni 1945",
+                "17 Agustus 1945",
+                "18 Agustus 1945",
+                "19 Agustus 1945"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Sistematika atau susunan UUD 1945 saat disahkan adalah ....",
+            opts: [
+                "Pembukaan dan Batang Tubuh",
+                "Pembukaan, Batang Tubuh, dan Penjelasan",
+                "Pembukaan, Pasal-pasal, dan Lampiran",
+                "Mukadimah dan Pasal-pasal"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Pasal UUD 1945 yang menegaskan bahwa bentuk negara Indonesia tidak dapat diubah adalah pasal ....",
+            opts: [
+                "1 ayat 1",
+                "7",
+                "37",
+                "18"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Pembukaan UUD 1945 tidak dapat diubah karena ....",
+            opts: [
+                "Sudah ditetapkan MPR",
+                "Mengandung dasar dan tujuan negara",
+                "Sesuai Piagam Jakarta",
+                "Berisi sila-sila Pancasila"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Pancasila sebagai dasar negara pertama kali dicetuskan oleh ....",
+            opts: [
+                "Dr. Radjiman Wedyodiningrat",
+                "Ir. Soekarno",
+                "Mohammad Yamin",
+                "Soepomo"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Nilai sila pertama Pancasila adalah ....",
+            opts: [
+                "Keadilan sosial",
+                "Persatuan Indonesia",
+                "Ketuhanan Yang Maha Esa",
+                "Kerakyatan yang dipimpin oleh hikmat kebijaksanaan"
+            ],
+            ans: 2 // (Indeks pilihan C: 2)
+        },
+        {
+            q: "Makna persatuan dan kesatuan dapat ditunjukkan melalui ....",
+            opts: [
+                "Munculnya konflik di masyarakat",
+                "Kerja sama dan sikap saling melengkapi",
+                "Perpecahan antarwarga masyarakat",
+                "Sikap intoleransi"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Berikut yang bukan manfaat persatuan dan kesatuan adalah ....",
+            opts: [
+                "Munculnya konflik",
+                "Memperkuat jati diri bangsa",
+                "Kerukunan dan silaturahmi terjaga",
+                "Masyarakat merasa aman dan nyaman"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Contoh perilaku mempertahankan persatuan di sekolah adalah ....",
+            opts: [
+                "Tidak mematuhi aturan sekolah",
+                "Kerja sama tanpa memandang suku dan agama",
+                "Bangga terhadap diri sendiri",
+                "Mementingkan kelompok tertentu"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Nilai persatuan dalam kehidupan bangsa tercermin dalam ....",
+            opts: [
+                "Menghormati hak orang lain",
+                "Melakukan korupsi",
+                "Membeda-bedakan suku dan agama",
+                "Sikap individualisme"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Semangat persatuan ditunjukkan dalam Sumpah Pemuda pada tanggal ....",
+            opts: [
+                "28 Oktober 1928",
+                "17 Agustus 1945",
+                "18 Agustus 1945",
+                "29 Mei 1945"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Lambang negara yang mencerminkan persatuan adalah ....",
+            opts: [
+                "Burung Garuda",
+                "Bendera Merah Putih",
+                "Pancasila",
+                "Lagu Kebangsaan"
+            ],
+            ans: 0 // (Indeks pilihan A: 0)
+        },
+        {
+            q: "Semboyan Bhinneka Tunggal Ika berarti ....",
+            opts: [
+                "Berbeda tetapi tetap satu tujuan",
+                "Bersatu kita teguh",
+                "Beraneka ragam budaya",
+                "Kesatuan dalam keberagaman"
+            ],
+            ans: 3 // (Indeks pilihan D: 3)
+        },
+        {
+            q: "Peran tokoh bangsa dalam persatuan tercermin melalui ....",
+            opts: [
+                "Pertikaian antar kelompok",
+                "Perundingan dan diplomasi",
+                "Sikap diskriminatif",
+                "Konflik horizontal"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        },
+        {
+            q: "Konflik sosial dapat dihindari jika masyarakat mengedepankan nilai ....",
+            opts: [
+                "Kekuasaan",
+                "Kesetaraan",
+                "Individualisme",
+                "Otoriterisme"
+            ],
+            ans: 1 // (Indeks pilihan B: 1)
+        }
     ],
     setC: [
-        { q: "Panitia yang merumuskan Piagam Jakarta disebut...", opts: ["Panitia Sembilan", "PPKI", "BPUPKI", "Panitia Delapan"], ans: 0 },
-        { q: "Kata 'Pancasila' diambil dari bahasa...", opts: ["Sanskerta", "Jawa Kuno", "Melayu", "Sunda"], ans: 0 },
-        { q: "Burung Garuda menengok ke arah...", opts: ["Kiri", "Kanan", "Depan", "Atas"], ans: 1 },
-        { q: "Kapas pada lambang sila kelima bermakna...", opts: ["Kecukupan pangan", "Kecukupan sandang", "Kekayaan alam", "Kelembutan hati"], ans: 1 },
-        { q: "Sila yang menekankan musyawarah mufakat adalah...", opts: ["Sila 2", "Sila 3", "Sila 4", "Sila 5"], ans: 2 },
-        { q: "Menjaga kerukunan antar umat beragama adalah pengamalan sila ke...", opts: ["1", "2", "3", "5"], ans: 0 },
-        { q: "Gotong royong merupakan cerminan dari sila...", opts: ["1", "2", "3", "4"], ans: 2 },
-        { q: "Membela tanah air adalah kewajiban yang sesuai dengan sila ke...", opts: ["1", "2", "3", "5"], ans: 2 },
-        { q: "Sikap adil terhadap sesama adalah pengamalan sila ke...", opts: ["2", "3", "4", "5"], ans: 3 },
-        { q: "Pancasila berkedudukan sebagai...", opts: ["Sumber dari segala sumber hukum", "Hukum adat", "Aturan internasional", "Kebijakan presiden"], ans: 0 }
+        {
+            q: "Gambar seluruh atau sebagian permukaan bumi pada bidang datar dengan skala tertentu disebut ....",
+            opts: [
+                "globe",
+                "peta",
+                "atlas",
+                "denah"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Komponen peta yang menjelaskan arti simbol-simbol pada peta disebut ....",
+            opts: [
+                "legenda",
+                "skala",
+                "judul",
+                "garis astronomis"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Arah yang biasanya ditunjukkan pada bagian atas peta adalah ....",
+            opts: [
+                "selatan",
+                "barat",
+                "timur",
+                "utara"
+            ],
+            ans: 3 // (Jawaban D: 3)
+        },
+        {
+            q: "Perbandingan jarak pada peta dengan jarak sebenarnya disebut ....",
+            opts: [
+                "orientasi",
+                "indeks",
+                "skala",
+                "inset"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Garis khayal mendatar yang digunakan untuk menentukan posisi suatu wilayah di utara atau selatan khatulistiwa disebut ....",
+            opts: [
+                "garis lintang",
+                "garis bujur",
+                "garis tepi",
+                "garis kontur"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Kalimantan Timur terletak di bagian .... Pulau Kalimantan.",
+            opts: [
+                "barat",
+                "timur",
+                "selatan",
+                "tengah"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Ibu kota Provinsi Kalimantan Timur adalah ....",
+            opts: [
+                "Balikpapan",
+                "Bontang",
+                "Samarinda",
+                "Tenggarong"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Pulau Kalimantan berbatasan langsung di daratan dengan negara ....",
+            opts: [
+                "Malaysia",
+                "Thailand",
+                "Filipina",
+                "Singapura"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Sungai besar yang mengalir melalui wilayah Kalimantan Timur dan Kota Samarinda adalah Sungai ....",
+            opts: [
+                "Kapuas",
+                "Barito",
+                "Mahakam",
+                "Musi"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Ibu kota Provinsi Kalimantan Selatan adalah ....",
+            opts: [
+                "Banjarbaru",
+                "Pontianak",
+                "Palangka Raya",
+                "Tanjung Selor"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Ibu kota Provinsi Kalimantan Barat adalah ....",
+            opts: [
+                "Samarinda",
+                "Pontianak",
+                "Banjarmasin",
+                "Tarakan"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Tari Saman berasal dari Provinsi ....",
+            opts: [
+                "Aceh",
+                "Bali",
+                "Jawa Barat",
+                "Papua"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Tari Kecak merupakan tarian tradisional yang berasal dari ....",
+            opts: [
+                "Sumatera Barat",
+                "Kalimantan Timur",
+                "Bali",
+                "Sulawesi Selatan"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Tari Piring berasal dari daerah ....",
+            opts: [
+                "Jawa Tengah",
+                "Sumatera Barat",
+                "Maluku",
+                "Nusa Tenggara Timur"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Tari Hudoq yang dikenal menggunakan topeng merupakan budaya masyarakat Dayak di wilayah ....",
+            opts: [
+                "Kalimantan Timur",
+                "Jawa Timur",
+                "Sulawesi Utara",
+                "Lampung"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Tokoh yang membacakan teks Proklamasi Kemerdekaan Indonesia pada 17 Agustus 1945 adalah ....",
+            opts: [
+                "Mohammad Hatta",
+                "Soekarno",
+                "Jenderal Sudirman",
+                "Ki Hajar Dewantara"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Tokoh yang mendampingi Soekarno saat Proklamasi Kemerdekaan dan kemudian menjadi Wakil Presiden pertama Indonesia adalah ....",
+            opts: [
+                "Mohammad Hatta",
+                "Ahmad Yani",
+                "Sutan Sjahrir",
+                "Bung Tomo"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Pahlawan perempuan dari Aceh yang gigih melawan penjajahan Belanda adalah ....",
+            opts: [
+                "R.A. Kartini",
+                "Martha Christina Tiahahu",
+                "Cut Nyak Dien",
+                "Dewi Sartika"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Tokoh yang terkenal membangkitkan semangat rakyat Surabaya dalam pertempuran 10 November 1945 adalah ....",
+            opts: [
+                "Pattimura",
+                "Bung Tomo",
+                "Tuanku Imam Bonjol",
+                "Pangeran Diponegoro"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Sikap yang tepat untuk menghargai jasa para pahlawan adalah ....",
+            opts: [
+                "mengabaikan upacara bendera",
+                "merusak fasilitas umum",
+                "belajar sungguh-sungguh dan menjaga persatuan",
+                "mementingkan kelompok sendiri"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        }
     ],
     setD: [
-        { q: "Tidak memaksakan agama kepada orang lain adalah nilai sila ke...", opts: ["1", "2", "3", "4"], ans: 0 },
-        { q: "Suka menabung dan tidak boros adalah pengamalan sila ke...", opts: ["2", "3", "4", "5"], ans: 3 },
-        { q: "Berani membela kebenaran dan keadilan mencerminkan sila ke...", opts: ["1", "2", "3", "4"], ans: 1 },
-        { q: "Cinta tanah air dan bangsa mencerminkan sila ke...", opts: ["1", "2", "3", "4"], ans: 2 },
-        { q: "Menghargai hasil karya orang lain adalah nilai dari sila...", opts: ["2", "3", "4", "5"], ans: 3 },
-        { q: "Menerima dan melaksanakan hasil musyawarah adalah wujud sila ke...", opts: ["2", "3", "4", "5"], ans: 2 },
-        { q: "Rantai pada sila kedua terdiri atas mata rantai berbentuk...", opts: ["Bulat dan Kotak", "Segitiga dan Bulat", "Persegi dan Lingkaran", "Segilima dan Lingkaran"], ans: 2 },
-        { q: "Bintang emas bersudut...", opts: ["4", "5", "6", "8"], ans: 1 },
-        { q: "Teks Pancasila dibacakan saat upacara bendera oleh...", opts: ["Pembina upacara", "Pemimpin upacara", "Peserta upacara", "Ajudan"], ans: 0 },
-        { q: "Pancasila berfungsi sebagai pandangan hidup bangsa, artinya...", opts: ["Pedoman aktivitas sehari-hari", "Alat pengekang kebebasan", "Simbol negara semata", "Hafalan anak sekolah"], ans: 0 }
+        {
+            q: "Tari Gantar merupakan tarian tradisional masyarakat Dayak yang berkembang di daerah ....",
+            opts: [
+                "Kalimantan Timur",
+                "Sumatera Utara",
+                "Jawa Barat",
+                "Bali"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Tari Kancet Ledo dari Kalimantan Timur dikenal juga dengan nama Tari ....",
+            opts: [
+                "Piring",
+                "Gong",
+                "Serimpi",
+                "Kipas"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Tari Hudoq biasanya menggunakan perlengkapan utama berupa ....",
+            opts: [
+                "payung",
+                "piring",
+                "topeng",
+                "kipas"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Lagu daerah 'Indung-Indung' berasal dari ....",
+            opts: [
+                "Kalimantan Timur",
+                "Maluku",
+                "Jawa Tengah",
+                "Sulawesi Utara"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Lagu daerah 'Buah Bolok' dikenal sebagai lagu dari daerah ....",
+            opts: [
+                "Kutai, Kalimantan Timur",
+                "Minangkabau, Sumatera Barat",
+                "Betawi, DKI Jakarta",
+                "Banyuwangi, Jawa Timur"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Lagu 'Ampar-Ampar Pisang' berasal dari Provinsi ....",
+            opts: [
+                "Kalimantan Barat",
+                "Kalimantan Selatan",
+                "Kalimantan Timur",
+                "Kalimantan Utara"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Lagu daerah 'Apuse' berasal dari ....",
+            opts: [
+                "Papua",
+                "Aceh",
+                "Bali",
+                "Lampung"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Lagu 'Yamko Rambe Yamko' dikenal sebagai lagu daerah dari ....",
+            opts: [
+                "Riau",
+                "Papua",
+                "Banten",
+                "Bengkulu"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Jenderal Sudirman dikenal sebagai Panglima Besar yang memimpin perjuangan dengan strategi ....",
+            opts: [
+                "diplomasi dagang",
+                "perang gerilya",
+                "politik etis",
+                "tanam paksa"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Walaupun sedang sakit, Jenderal Sudirman tetap berjuang dengan cara ....",
+            opts: [
+                "memimpin gerilya melawan Belanda",
+                "meninggalkan Indonesia",
+                "bekerja untuk pemerintah kolonial",
+                "menghentikan seluruh perlawanan"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Bung Tomo dikenang karena membangkitkan semangat rakyat dalam pertempuran di Kota ....",
+            opts: [
+                "Bandung",
+                "Surabaya",
+                "Medan",
+                "Semarang"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Pertempuran Surabaya yang diperingati sebagai Hari Pahlawan terjadi pada tanggal ....",
+            opts: [
+                "1 Juni",
+                "17 Agustus",
+                "10 November",
+                "28 Oktober"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Tokoh yang dikenal sebagai Bapak Pendidikan Nasional adalah ....",
+            opts: [
+                "Ki Hajar Dewantara",
+                "Mohammad Yamin",
+                "Jenderal Sudirman",
+                "Bung Tomo"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Semboyan pendidikan 'Tut Wuri Handayani' dikemukakan oleh ....",
+            opts: [
+                "R.A. Kartini",
+                "Ki Hajar Dewantara",
+                "Dewi Sartika",
+                "Cut Nyak Dien"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        },
+        {
+            q: "Pahlawan perempuan yang mendirikan Sekolah Istri untuk pendidikan kaum perempuan adalah ....",
+            opts: [
+                "Dewi Sartika",
+                "Cut Meutia",
+                "Martha Christina Tiahahu",
+                "Maria Walanda Maramis"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Proklamasi Kemerdekaan Republik Indonesia dibacakan pada tanggal ....",
+            opts: [
+                "20 Mei 1908",
+                "28 Oktober 1928",
+                "17 Agustus 1945",
+                "10 November 1945"
+            ],
+            ans: 2 // (Jawaban C: 2)
+        },
+        {
+            q: "Teks Proklamasi Kemerdekaan Indonesia dibacakan di ....",
+            opts: [
+                "Jalan Pegangsaan Timur Nomor 56, Jakarta",
+                "Istana Bogor",
+                "Gedung Sate, Bandung",
+                "Tugu Pahlawan, Surabaya"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Tokoh yang mengetik naskah Proklamasi Kemerdekaan Indonesia adalah ....",
+            opts: [
+                "Sayuti Melik",
+                "Sukarni",
+                "Wikana",
+                "B.M. Diah"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Tokoh yang turut merumuskan naskah Proklamasi bersama Soekarno dan Mohammad Hatta adalah ....",
+            opts: [
+                "Ahmad Soebardjo",
+                "Bung Tomo",
+                "Jenderal Sudirman",
+                "Ki Hajar Dewantara"
+            ],
+            ans: 0 // (Jawaban A: 0)
+        },
+        {
+            q: "Peristiwa Rengasdengklok bertujuan mendesak Soekarno dan Mohammad Hatta agar segera ....",
+            opts: [
+                "membentuk organisasi dagang",
+                "memproklamasikan kemerdekaan Indonesia",
+                "menyerahkan kekuasaan kepada Jepang",
+                "meninggalkan Jakarta selamanya"
+            ],
+            ans: 1 // (Jawaban B: 1)
+        }
     ]
 };
 
